@@ -1,19 +1,58 @@
 ﻿---
-const pageTitle = "Augusto Rico | Investigación";
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const proyectos = (
+  await getCollection(
+    "proyectos",
+    ({ data }) => data.public && data.featured
+  )
+).sort((a, b) => b.data.year - a.data.year);
 ---
 
-<!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>{pageTitle}</title>
-  </head>
+<BaseLayout
+  title="Augusto Rico"
+  description="Investigacin en economa, estadstica, complejidad y poltica pblica."
+>
+  <section class="hero">
+    <p class="metadata">Portafolio acadmico</p>
+    <h1>Economa, estadstica, complejidad y poltica pblica.</h1>
+    <p>
+      Este sitio rene proyectos, planes de trabajo, documentos y materiales
+      de investigacin.
+    </p>
 
-  <body>
-    <main>
-      <h1>Augusto Rico</h1>
-      <p>Economía, estadística, complejidad y política pública.</p>
-    </main>
-  </body>
-</html>
+    <div class="actions">
+      <a class="button primary" href="/investigacion/">Ver investigacin</a>
+      <a class="button" href="/cv/">Consultar CV</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-heading">
+      <h2>Proyectos seleccionados</h2>
+      <a href="/investigacion/">Ver todos</a>
+    </div>
+
+    <div class="project-grid">
+      {
+        proyectos.map((proyecto) => (
+          <article class="card">
+            <p class="metadata">
+              {proyecto.data.type}  {proyecto.data.year}
+            </p>
+
+            <h3>
+              <a href={`/proyectos/${proyecto.id}/`}>
+                {proyecto.data.title}
+              </a>
+            </h3>
+
+            <p>{proyecto.data.summary}</p>
+            <p class="muted">{proyecto.data.status}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

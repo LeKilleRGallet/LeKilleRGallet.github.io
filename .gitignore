@@ -1,24 +1,19 @@
-# build output
+﻿node_modules/
 dist/
-# generated types
 .astro/
 
-# dependencies
-node_modules/
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
 
-# logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
+public/pdf/*.pdf
 
-
-# environment variables
-.env
-.env.production
-
-# macOS-specific files
-.DS_Store
-
-# jetbrains setting folder
-.idea/
+documentos/**/main.pdf

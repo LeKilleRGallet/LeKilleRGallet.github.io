@@ -1,5 +1,6 @@
 ﻿---
 import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
   const proyectos = await getCollection(
@@ -15,6 +16,7 @@ export async function getStaticPaths() {
 
 const { proyecto } = Astro.props;
 const { Content } = await render(proyecto);
+
 const {
   title,
   subtitle,
@@ -24,44 +26,60 @@ const {
   authors,
   summary,
   topics,
+  pdf,
   updated,
 } = proyecto.data;
 ---
 
-<!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>{title} | Augusto Rico</title>
-  </head>
+<BaseLayout title={title} description={summary}>
+  <article class="prose">
+    <a href="/investigacion/"> Investigacin</a>
 
-  <body>
-    <main>
-      <a href="/">Inicio</a>
+    <p class="metadata">{type}  {status}  {year}</p>
 
-      <p>{type}  {status}  {year}</p>
+    <h1>{title}</h1>
+    {subtitle && <h2>{subtitle}</h2>}
 
-      <h1>{title}</h1>
-      {subtitle && <h2>{subtitle}</h2>}
+    <p>{authors.join(", ")}</p>
 
-      <p>{authors.join(", ")}</p>
+    <div class="actions">
+      {
+        pdf && (
+          <>
+            <a
+              class="button primary"
+              href={pdf}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Ver PDF
+            </a>
 
-      <h2>Resumen</h2>
-      <p>{summary}</p>
+            <a class="button" href={pdf} download>
+              Descargar
+            </a>
+          </>
+        )
+      }
+    </div>
 
-      <h2>Contenido</h2>
-      <Content />
+    <h2>Resumen</h2>
+    <p>{summary}</p>
 
-      <h2>Temas</h2>
-      <ul>
-        {topics.map((topic) => <li>{topic}</li>)}
-      </ul>
+    <h2>Contenido</h2>
+    <Content />
 
-      <p>
-        Actualizado: {updated.toLocaleDateString("es-CO", { timeZone: "UTC" })}
-      </p>
-    </main>
-  </body>
-</html>
+    <h2>Temas</h2>
+    <ul class="tags">
+      {topics.map((topic) => <li>{topic}</li>)}
+    </ul>
 
+    <p class="muted">
+      Actualizado: {
+        updated.toLocaleDateString("es-CO", {
+          timeZone: "UTC",
+        })
+      }
+    </p>
+  </article>
+</BaseLayout>

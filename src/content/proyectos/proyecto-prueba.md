@@ -10,9 +10,11 @@ summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Este contenid
 topics:
   - "Tema de prueba"
   - "rea de prueba"
+pdf: "/pdf/proyecto-prueba.pdf"
 public: true
 featured: true
 updated: "2026-08-01"
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua.

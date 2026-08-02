@@ -1,0 +1,47 @@
+﻿---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const proyectos = (
+  await getCollection("proyectos", ({ data }) => data.public)
+).sort((a, b) => b.data.year - a.data.year);
+---
+
+<BaseLayout
+  title="Investigacin"
+  description="Catlogo de proyectos y documentos de investigacin."
+>
+  <header class="prose">
+    <p class="metadata">Catlogo</p>
+    <h1>Investigacin</h1>
+    <p>
+      Proyectos, planes de trabajo y documentos organizados por ficha.
+    </p>
+  </header>
+
+  <div class="project-grid">
+    {
+      proyectos.map((proyecto) => (
+        <article class="card">
+          <p class="metadata">
+            {proyecto.data.type}  {proyecto.data.status}  {proyecto.data.year}
+          </p>
+
+          <h2>
+            <a href={`/proyectos/${proyecto.id}/`}>
+              {proyecto.data.title}
+            </a>
+          </h2>
+
+          {proyecto.data.subtitle && <p>{proyecto.data.subtitle}</p>}
+
+          <p>{proyecto.data.summary}</p>
+
+          <ul class="tags">
+            {proyecto.data.topics.map((topic) => <li>{topic}</li>)}
+          </ul>
+        </article>
+      ))
+    }
+  </div>
+</BaseLayout>
