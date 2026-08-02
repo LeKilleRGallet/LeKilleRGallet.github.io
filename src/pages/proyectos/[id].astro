@@ -1,0 +1,67 @@
+﻿---
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const proyectos = await getCollection(
+    "proyectos",
+    ({ data }) => data.public
+  );
+
+  return proyectos.map((proyecto) => ({
+    params: { id: proyecto.id },
+    props: { proyecto },
+  }));
+}
+
+const { proyecto } = Astro.props;
+const { Content } = await render(proyecto);
+const {
+  title,
+  subtitle,
+  type,
+  status,
+  year,
+  authors,
+  summary,
+  topics,
+  updated,
+} = proyecto.data;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title} | Augusto Rico</title>
+  </head>
+
+  <body>
+    <main>
+      <a href="/">Inicio</a>
+
+      <p>{type}  {status}  {year}</p>
+
+      <h1>{title}</h1>
+      {subtitle && <h2>{subtitle}</h2>}
+
+      <p>{authors.join(", ")}</p>
+
+      <h2>Resumen</h2>
+      <p>{summary}</p>
+
+      <h2>Contenido</h2>
+      <Content />
+
+      <h2>Temas</h2>
+      <ul>
+        {topics.map((topic) => <li>{topic}</li>)}
+      </ul>
+
+      <p>
+        Actualizado: {updated.toLocaleDateString("es-CO", { timeZone: "UTC" })}
+      </p>
+    </main>
+  </body>
+</html>
+
