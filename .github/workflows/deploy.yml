@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - desarrollo-integral
   workflow_dispatch:
 
 permissions:
@@ -24,16 +23,22 @@ jobs:
       - name: Descargar repositorio
         uses: actions/checkout@v7
 
-      - name: Compilar LaTeX
+      - name: Compilar documentos LaTeX
         uses: xu-cheng/latex-action@v4
         with:
-          root_file: documentos/proyecto-prueba/main.tex
+          root_file: documentos/*/main.tex
           work_in_root_file_dir: true
 
       - name: Copiar PDF al sitio
+        shell: bash
         run: |
           mkdir -p public/pdf
-          cp documentos/proyecto-prueba/main.pdf public/pdf/proyecto-prueba.pdf
+
+          find documentos -mindepth 2 -maxdepth 2 -name main.pdf -print0 |
+          while IFS= read -r -d '' archivo; do
+            slug="$(basename "$(dirname "$archivo")")"
+            cp "$archivo" "public/pdf/${slug}.pdf"
+          done
 
       - name: Configurar Node
         uses: actions/setup-node@v7
@@ -56,7 +61,6 @@ jobs:
           path: ./dist
 
   deploy:
-    if: github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
 
