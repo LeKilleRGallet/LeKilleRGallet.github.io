@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { topicHubs } from "../../data/topics";
+---
+
+<BaseLayout
+  title="Temas"
+  description="Temas de trabajo e investigación de Augusto Rico: datos, econometría, economía conductual, teoría de juegos, finanzas cuantitativas y cumplimiento tributario."
+  alternateEs="/temas/"
+  alternateEn="/en/topics/"
+>
+  <header class="page-header">
+    <p class="eyebrow">Temas</p>
+    <h1>Áreas conectadas por evidencia.</h1>
+    <p>
+      Estos hubs agrupan proyectos, documentos y capacidades ya publicados en el sitio.
+      No son páginas creadas solo para palabras clave: cada tema enlaza evidencia concreta.
+    </p>
+  </header>
+
+  <div class="audience-grid">
+    {topicHubs.map((topic) => (
+      <article class="audience-card">
+        <p class="eyebrow">{topic.keywords.slice(0, 3).join(" · ")}</p>
+        <h2><a href={`/temas/${topic.slug}/`}>{topic.title}</a></h2>
+        <p>{topic.description}</p>
+      </article>
+    ))}
+  </div>
+</BaseLayout>
