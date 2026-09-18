@@ -1,18 +1,29 @@
-﻿---
-title: "Ttulo del proyecto"
-subtitle: "Subttulo"
-type: "Proyecto de investigacin"
+---
+title: "Título del proyecto"
+subtitle: "Subtítulo"
+type: "Proyecto de investigación"
 status: "Borrador"
 year: 2026
 authors:
-  - "Nombre del autor"
+  - "Augusto Rico"
+role: "Autor"
 summary: "Resumen del proyecto."
 topics:
   - "Tema"
 pdf: "/pdf/slug-del-proyecto.pdf"
 public: false
 featured: false
-updated: "2026-08-01"
+updated: "2026-09-18"
 ---
 
-Descripcin del proyecto.
+## Pregunta
+
+Describe la pregunta de investigación.
+
+## Método
+
+Describe datos, estrategia empírica, modelo o enfoque teórico.
+
+## Estado
+
+Explica qué está terminado y qué sigue pendiente.
