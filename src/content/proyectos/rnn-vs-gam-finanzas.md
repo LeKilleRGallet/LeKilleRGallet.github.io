@@ -14,6 +14,8 @@ topics:
   - "Finanzas cuantitativas"
   - "GARCH"
   - "Optimización"
+citekey: "rico2024rnngam"
+citationType: "unpublished"
 public: true
 featured: true
 updated: "2026-09-18"
@@ -35,4 +37,5 @@ financiera incluye GARCH(1,1) para volatilidad y portafolios de Markowitz.
 ## Estado
 
 El manuscrito está siendo reestructurado para mejorar la comparabilidad entre
-modelos y fortalecer su diseño antes de un eventual envío a revista.
+modelos. No hay un PDF público asociado a esta ficha por ahora. La cita identifica
+el manuscrito en desarrollo, no una publicación.
