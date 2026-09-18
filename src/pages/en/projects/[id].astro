@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { topicHubs } from "../../../data/topics";
 
 export async function getStaticPaths() {
   const projects = await getCollection("proyectos", ({ data }) => data.public);
@@ -12,6 +13,9 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
+const relatedTopicHubs = topicHubs.filter((hub) =>
+  (hub.projectIds as readonly string[]).includes(project.id)
+);
 const {
   title,
   titleEn,
@@ -181,6 +185,18 @@ const breadcrumbJsonLd = {
         <p>{section.body}</p>
       </section>
     ))}
+
+    {relatedTopicHubs.length > 0 && (
+      <section class="section-block">
+        <p class="eyebrow">Topical context</p>
+        <h2>Explore by area</h2>
+        <div class="actions">
+          {relatedTopicHubs.map((hub) => (
+            <a class="button" href={`/en/topics/${hub.slug}/`}>{hub.titleEn}</a>
+          ))}
+        </div>
+      </section>
+    )}
 
     <h2>Topics</h2>
     <ul class="tags">
