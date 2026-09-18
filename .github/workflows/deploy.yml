@@ -1,4 +1,4 @@
-﻿name: Build and deploy academic site
+name: Build and deploy academic site
 
 on:
   push:
@@ -23,7 +23,15 @@ jobs:
       - name: Descargar repositorio
         uses: actions/checkout@v7
 
+      - name: Restaurar PDF LaTeX compilados
+        id: latex-cache
+        uses: actions/cache@v4
+        with:
+          path: documentos/**/main.pdf
+          key: ${{ runner.os }}-latex-${{ hashFiles('documentos/**/*.tex', 'documentos/**/*.bib', 'documentos/**/*.sty') }}
+
       - name: Compilar documentos LaTeX
+        if: steps.latex-cache.outputs.cache-hit != 'true'
         uses: xu-cheng/latex-action@v4
         with:
           root_file: documentos/*/main.tex
