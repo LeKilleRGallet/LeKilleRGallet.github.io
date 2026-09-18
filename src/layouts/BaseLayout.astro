@@ -81,7 +81,7 @@ const graphJsonLd = {
     <link rel="author" href="/sobre-mi/" />
     {alternateEs && <link rel="alternate" hreflang="es" href={new URL(alternateEs, Astro.site)} />}
     {alternateEn && <link rel="alternate" hreflang="en" href={new URL(alternateEn, Astro.site)} />}
-    {(alternateEs || alternateEn) && <link rel="alternate" hreflang="x-default" href={new URL("/", Astro.site)} />}
+    {(alternateEs || alternateEn) && <link rel="alternate" hreflang="x-default" href={new URL(alternateEs ?? "/", Astro.site)} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link
       rel="alternate"

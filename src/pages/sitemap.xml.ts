@@ -68,6 +68,7 @@ export const GET = async ({ site }: any) => {
     <lastmod>${lastmod}</lastmod>
     <xhtml:link rel="alternate" hreflang="es" href="${esc(esUrl)}" />
     <xhtml:link rel="alternate" hreflang="en" href="${esc(enUrl)}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${esc(esUrl)}" />
   </url>`;
     })
     .join("\n");
