@@ -1,0 +1,60 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const lineas = [
+  {
+    title: "IA y acción de tutela en salud",
+    stage: "Diseño de investigación",
+    text: "Evaluar si la expansión de herramientas de IA cambia el acceso, la composición o el comportamiento alrededor de las acciones de tutela en salud y la respuesta de las EPS."
+  },
+  {
+    title: "Régimen SIMPLE, canibalización tributaria y formalización",
+    stage: "Agenda empírica",
+    text: "Separar tres preguntas: sustitución entre regímenes, efectos sobre formalización y medición multidimensional de informalidad tributaria."
+  },
+  {
+    title: "BRT, accesibilidad y estructura urbana",
+    stage: "Agenda empírica",
+    text: "Estudiar la expansión de sistemas BRT en Bogotá mediante métodos de evaluación causal, accesibilidad y redes."
+  },
+  {
+    title: "Economía como ciencia",
+    stage: "Agenda teórica y aplicada",
+    text: "Contrastar prácticas y criterios de la economía con marcos de filosofía de la ciencia, incluyendo Popper, Kuhn y Feyerabend."
+  },
+  {
+    title: "Redes, retención en la fuente y formalidad",
+    stage: "Hipótesis",
+    text: "Explorar si las relaciones de retención y facturación generan mecanismos de red que afectan el cumplimiento y la formalidad."
+  },
+  {
+    title: "Apuestas deportivas y externalidades",
+    stage: "Diseño de investigación",
+    text: "Analizar la relación entre exposición comercial a apuestas deportivas y resultados sociales o de salud usando datos administrativos y diseños cuasiexperimentales."
+  }
+];
+---
+
+<BaseLayout
+  title="Agenda de investigación"
+  description="Preguntas y líneas de investigación abiertas de Augusto Rico."
+>
+  <header class="page-header">
+    <p class="eyebrow">Research agenda</p>
+    <h1>Preguntas abiertas.</h1>
+    <p>
+      Estas líneas son agenda de trabajo. No se presentan como papers terminados
+      ni como resultados establecidos.
+    </p>
+  </header>
+
+  <div class="agenda-list">
+    {lineas.map((linea) => (
+      <article class="agenda-item">
+        <p class="eyebrow">{linea.stage}</p>
+        <h2>{linea.title}</h2>
+        <p>{linea.text}</p>
+      </article>
+    ))}
+  </div>
+</BaseLayout>
