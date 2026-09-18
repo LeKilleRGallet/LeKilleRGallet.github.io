@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { publicProfile } from "../../data/publicProfile";
+---
+
+<BaseLayout
+  title="Contact"
+  description="Contact Augusto Rico for data analysis, research support, economics and quantitative projects."
+  lang="en"
+  alternateEs="/contacto/"
+  alternateEn="/en/contact/"
+>
+  <header class="page-header">
+    <p class="eyebrow">Contact</p>
+    <h1>Get in touch.</h1>
+    <p>For data, research, economics or quantitative project discussions.</p>
+  </header>
+
+  <div class="actions">
+    <a class="button primary" href={`mailto:${publicProfile.email}`}>{publicProfile.email}</a>
+    <a class="button" href={publicProfile.links.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+    <a class="button" href={publicProfile.links.github} target="_blank" rel="noreferrer">GitHub</a>
+  </div>
+</BaseLayout>
