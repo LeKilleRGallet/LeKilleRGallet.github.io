@@ -42,7 +42,8 @@ const graphJsonLd = {
     {
       "@type": "Person",
       "@id": personId,
-      name: publicProfile.name,
+      name: publicProfile.legalName,
+      alternateName: publicProfile.aliases,
       url: publicProfile.links.website,
       mainEntityOfPage: publicProfile.links.about,
       jobTitle: "Economist and Data Analyst",
@@ -74,7 +75,7 @@ const graphJsonLd = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="author" content={publicProfile.name} />
+    <meta name="author" content={publicProfile.legalName} />
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#111827" />
     <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
