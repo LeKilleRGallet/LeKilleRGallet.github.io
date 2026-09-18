@@ -1,6 +1,8 @@
 ---
 title: "RNN/LSTM vs GAM para predicción de series financieras"
 titleEn: "RNN/LSTM vs GAM for Financial Time-Series Forecasting"
+seoTitle: "RNN/LSTM vs GAM en series financieras"
+seoTitleEn: "RNN/LSTM vs GAM for Financial Forecasting"
 subtitle: "Predicción de alta frecuencia, volatilidad y construcción de portafolios"
 subtitleEn: "High-frequency forecasting, volatility and portfolio construction"
 type: "Manuscrito de investigación"
@@ -14,6 +16,8 @@ role: "Autor"
 roleEn: "Author"
 summary: "Comparación de redes neuronales recurrentes LSTM y modelos aditivos generalizados para pronóstico intradía, con modelación de volatilidad y optimización de portafolios."
 summaryEn: "Comparison of LSTM recurrent neural networks and generalized additive models for intraday forecasting, with volatility modelling and portfolio optimization."
+seoDescription: "Manuscrito de Augusto Rico que compara LSTM y GAM en series financieras, con GARCH, forecasting intradía y optimización de portafolios."
+seoDescriptionEn: "Research manuscript comparing LSTM and GAM for financial forecasting, with GARCH volatility modelling and Markowitz portfolio optimization."
 topics:
   - "Machine Learning"
   - "Series de tiempo"
