@@ -1,6 +1,7 @@
 import { getCollection } from "astro:content";
 import { publicProfile } from "../data/publicProfile";
 import { archiveDocuments } from "../data/archive";
+import { topicHubs } from "../data/topics";
 
 export const GET = async ({ site }: any) => {
   const base = site?.toString().replace(/\/$/, "") ?? "https://lekillergallet.github.io";
@@ -26,6 +27,12 @@ export const GET = async ({ site }: any) => {
 - PDF: ${p.data.pdf ? base + p.data.pdf : "No public PDF listed"}
 - Source: ${p.data.repository ?? "No public source repository listed"}
 `
+    )
+    .join("\n");
+
+  const topicText = topicHubs
+    .map(
+      (topic) => `- ${topic.title} / ${topic.titleEn}: ${topic.descriptionEn} ES: ${base}/temas/${topic.slug}/ EN: ${base}/en/topics/${topic.slug}/`
     )
     .join("\n");
 
@@ -72,9 +79,7 @@ Economics, Universidad Nacional de Colombia, 2024.
 
 ${research}
 
-## Academic archive
-
-${archive}
+## Topic hubs\n\n${topicText}\n\n## Academic archive\n\n${archive}
 
 ## Status, authorship and citation rule
 
@@ -87,8 +92,7 @@ essay is not a peer-reviewed publication unless explicitly marked otherwise.
 
 - ${base}/api/profile.json
 - ${base}/api/research.json
-- ${base}/api/archive.json
-- ${base}/feed.xml
+- ${base}/api/archive.json\n- ${base}/api/topics.json\n- ${base}/feed.xml
 - ${base}/sitemap.xml
 
 ## Public data policy
