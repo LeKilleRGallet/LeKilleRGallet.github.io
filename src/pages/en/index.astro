@@ -26,9 +26,9 @@ const projects = (
     </p>
 
     <div class="actions">
-      <a class="button primary" href="/research/">Research portfolio</a>
-      <a class="button" href="/data/">Data portfolio</a>
-      <a class="button" href="/finance/">Finance & Quant</a>
+      <a class="button primary" href="/en/research/">Research portfolio</a>
+      <a class="button" href="/en/data/">Data portfolio</a>
+      <a class="button" href="/en/finance/">Finance & Quant</a>
       <a class="text-link" href="/pdf/cv.pdf" target="_blank" rel="noreferrer">CV PDF</a>
     </div>
 
@@ -107,7 +107,7 @@ const projects = (
     </div>
 
     <div class="project-grid">
-      {projects.map((project) => <ProjectCard proyecto={project} />)}
+      {projects.map((project) => <ProjectCard proyecto={project} lang="en" />)}
     </div>
   </section>
 

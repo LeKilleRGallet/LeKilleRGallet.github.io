@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import TrackedLanding from "../../components/TrackedLanding.astro";
+import { publicProfile } from "../../data/publicProfile";
+---
+
+<BaseLayout
+  title="Data & BI"
+  description="Augusto Rico's data portfolio: Python, SQL, PySpark, Azure Databricks, Power BI, automation, data quality and analytics."
+  lang="en"
+  alternateEs="/data/"
+  alternateEn="/en/data/"
+>
+  <header class="page-header">
+    <p class="eyebrow">Data · BI · Automation</p>
+    <h1>Data for decision-making.</h1>
+    <p>
+      I work with administrative datasets, reproducible pipelines, data quality,
+      automation, segmentation and visualization.
+    </p>
+  </header>
+
+  <div class="capability-grid">
+    <article class="capability">
+      <span class="number">01</span>
+      <h3>Data pipelines</h3>
+      <p>Extraction, cleaning, transformation, validation, deduplication and aggregation with Python, SQL, PySpark and Azure Databricks.</p>
+    </article>
+    <article class="capability">
+      <span class="number">02</span>
+      <h3>Analytics</h3>
+      <p>Indicators, classification, clustering, behavioral analysis and model evaluation.</p>
+    </article>
+    <article class="capability">
+      <span class="number">03</span>
+      <h3>Business intelligence</h3>
+      <p>Power BI, Excel and reporting for technical and management audiences.</p>
+    </article>
+  </div>
+
+  <section class="section-block">
+    <p class="eyebrow">Stack</p>
+    <ul class="tags">
+      {publicProfile.skills.map((skill) => <li>{skill}</li>)}
+    </ul>
+
+    <div class="actions">
+      <a class="button primary" href="/en/collaborate/">Work with me</a>
+      <a class="button" href="/pdf/cv.pdf">CV PDF</a>
+      <a class="button" href="/en/archive/">Academic archive</a>
+    </div>
+  </section>
+
+  <TrackedLanding label="This page may register an anonymous visit when opened from a tracked application." />
+</BaseLayout>

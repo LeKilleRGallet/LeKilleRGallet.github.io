@@ -1,24 +1,44 @@
 ---
-const { proyecto } = Astro.props;
-const { title, type, status, year, summary, topics } = proyecto.data;
+const { proyecto, lang = "es" } = Astro.props;
+const isEnglish = lang === "en";
+const {
+  title,
+  titleEn,
+  type,
+  typeEn,
+  status,
+  statusEn,
+  year,
+  summary,
+  summaryEn,
+  topics,
+  topicsEn
+} = proyecto.data;
+
+const displayTitle = isEnglish ? titleEn ?? title : title;
+const displayType = isEnglish ? typeEn ?? type : type;
+const displayStatus = isEnglish ? statusEn ?? status : status;
+const displaySummary = isEnglish ? summaryEn ?? summary : summary;
+const displayTopics = isEnglish ? topicsEn ?? topics : topics;
+const href = isEnglish ? `/en/projects/${proyecto.id}/` : `/proyectos/${proyecto.id}/`;
 ---
 
 <article class="card">
   <div class="status-row">
-    <span class="status">{status}</span>
-    <span>{type}</span>
+    <span class="status">{displayStatus}</span>
+    <span>{displayType}</span>
     <span>{year}</span>
   </div>
 
   <h3 class="card-title">
-    <a href={`/proyectos/${proyecto.id}/`}>{title}</a>
+    <a href={href}>{displayTitle}</a>
   </h3>
 
-  <p>{summary}</p>
+  <p>{displaySummary}</p>
 
   <div class="card-footer">
-    <ul class="tags" aria-label="Temas">
-      {topics.slice(0, 4).map((topic) => <li>{topic}</li>)}
+    <ul class="tags" aria-label={isEnglish ? "Topics" : "Temas"}>
+      {displayTopics.slice(0, 4).map((topic) => <li>{topic}</li>)}
     </ul>
   </div>
 </article>

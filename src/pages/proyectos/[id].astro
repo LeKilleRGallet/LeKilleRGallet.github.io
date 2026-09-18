@@ -131,7 +131,12 @@ const breadcrumbJsonLd = {
 };
 ---
 
-<BaseLayout title={title} description={summary}>
+<BaseLayout
+  title={title}
+  description={summary}
+  alternateEs={`/proyectos/${proyecto.id}/`}
+  alternateEn={`/en/projects/${proyecto.id}/`}
+>
   <Fragment slot="head">
     {citekey && <meta name="citation_title" content={title} />}
     {citekey && authors.map((author) => <meta name="citation_author" content={author} />)}
@@ -173,6 +178,7 @@ const breadcrumbJsonLd = {
         {pdf && <a class="button primary" href={pdf} target="_blank" rel="noreferrer">Ver PDF</a>}
         {repository && <a class="button" href={repository} target="_blank" rel="noreferrer">Fuente en GitHub</a>}
         {citekey && <a class="button" href={`/citations/${proyecto.id}.bib`}>BibTeX</a>}
+        <a class="button" href={`/en/projects/${proyecto.id}/`}>English</a>
       </div>
     </header>
 

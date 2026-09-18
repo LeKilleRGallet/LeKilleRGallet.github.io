@@ -9,17 +9,20 @@ export const GET = ({ site }: any) => {
 
 ## Canonical sources
 
-- Profile: ${base}/sobre-mi/
+- Profile (Spanish): ${base}/sobre-mi/
+- Profile (English): ${base}/en/about/
 - Machine-readable profile: ${base}/api/profile.json
-- Research: ${base}/investigacion/
+- Research (Spanish): ${base}/investigacion/
+- Research (English): ${base}/en/research/
 - Machine-readable research: ${base}/api/research.json
 - Academic archive: ${base}/archivo/
 - Machine-readable archive: ${base}/api/archive.json
 - CV: ${base}/cv/
 - CV PDF: ${base}/pdf/cv.pdf
-- Data portfolio: ${base}/data/
-- Research portfolio: ${base}/research/
-- Finance portfolio: ${base}/finance/
+- Data portfolio (ES/EN): ${base}/data/ | ${base}/en/data/
+- Research support (ES/EN): ${base}/research/ | ${base}/en/research-support/
+- Finance portfolio (ES/EN): ${base}/finance/ | ${base}/en/finance/
+- Collaboration (ES/EN): ${base}/colaborar/ | ${base}/en/collaborate/
 
 ## Public profile
 

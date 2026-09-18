@@ -1,0 +1,194 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("proyectos", ({ data }) => data.public);
+
+  return projects.map((project) => ({
+    params: { id: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const {
+  title,
+  titleEn,
+  subtitle,
+  subtitleEn,
+  type,
+  typeEn,
+  status,
+  statusEn,
+  year,
+  authors,
+  contributors,
+  roleEn,
+  summary,
+  summaryEn,
+  topics,
+  topicsEn,
+  sectionsEn,
+  pdf,
+  repository,
+  citekey,
+  updated,
+} = project.data;
+
+const displayTitle = titleEn ?? title;
+const displaySubtitle = subtitleEn ?? subtitle;
+const displayType = typeEn ?? type;
+const displayStatus = statusEn ?? status;
+const displaySummary = summaryEn ?? summary;
+const displayTopics = topicsEn ?? topics;
+
+const canonical = new URL(`/en/projects/${project.id}/`, Astro.site).toString();
+const spanishUrl = new URL(`/proyectos/${project.id}/`, Astro.site).toString();
+const pdfUrl = pdf ? new URL(pdf, Astro.site).toString() : undefined;
+const personId = new URL("/#person", Astro.site).toString();
+const websiteId = new URL("/#website", Astro.site).toString();
+
+const personRef = (name: string) =>
+  name === "Augusto Rico"
+    ? { "@type": "Person", "@id": personId, name }
+    : { "@type": "Person", name };
+
+const schemaType = type.toLowerCase().includes("proyecto")
+  ? "ResearchProject"
+  : "ScholarlyArticle";
+
+const creativeJsonLd =
+  schemaType === "ResearchProject"
+    ? {
+        "@context": "https://schema.org",
+        "@type": "ResearchProject",
+        "@id": `${spanishUrl}#research-project`,
+        name: displayTitle,
+        description: displaySummary,
+        inLanguage: "en",
+        startDate: `${year}-01-01`,
+        dateModified: updated.toISOString().slice(0, 10),
+        url: canonical,
+        mainEntityOfPage: canonical,
+        keywords: displayTopics.join(", "),
+        author: authors.map(personRef),
+        contributor: contributors.map((item) => ({
+          ...personRef(item.name),
+          description: item.roleEn ?? item.role,
+        })),
+        isPartOf: { "@id": websiteId },
+      }
+    : {
+        "@context": "https://schema.org",
+        "@type": "ScholarlyArticle",
+        "@id": `${spanishUrl}#work`,
+        headline: displayTitle,
+        name: displayTitle,
+        description: displaySummary,
+        inLanguage: "en",
+        author: authors.map(personRef),
+        contributor: contributors.map((item) => ({
+          ...personRef(item.name),
+          description: item.roleEn ?? item.role,
+        })),
+        datePublished: String(year),
+        dateModified: updated.toISOString().slice(0, 10),
+        url: canonical,
+        mainEntityOfPage: canonical,
+        isPartOf: { "@id": websiteId },
+        keywords: displayTopics.join(", "),
+        encoding: pdfUrl
+          ? {
+              "@type": "MediaObject",
+              contentUrl: pdfUrl,
+              encodingFormat: "application/pdf",
+            }
+          : undefined,
+        creativeWorkStatus: displayStatus,
+      };
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: new URL("/en/", Astro.site).toString() },
+    { "@type": "ListItem", position: 2, name: "Research", item: new URL("/en/research/", Astro.site).toString() },
+    { "@type": "ListItem", position: 3, name: displayTitle, item: canonical },
+  ],
+};
+---
+
+<BaseLayout
+  title={displayTitle}
+  description={displaySummary}
+  lang="en"
+  alternateEs={`/proyectos/${project.id}/`}
+  alternateEn={`/en/projects/${project.id}/`}
+>
+  <Fragment slot="head">
+    <meta name="citation_title" content={displayTitle} />
+    {authors.map((author) => <meta name="citation_author" content={author} />)}
+    <meta name="citation_publication_date" content={String(year)} />
+    <meta name="citation_abstract_html_url" content={canonical} />
+    {pdfUrl && <meta name="citation_pdf_url" content={pdfUrl} />}
+    {displayTopics.map((topic) => <meta name="citation_keywords" content={topic} />)}
+    {citekey && <link rel="alternate" type="application/x-bibtex" href={`/citations/${project.id}.bib`} />}
+    <script type="application/ld+json" set:html={JSON.stringify(creativeJsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
+  </Fragment>
+
+  <article class="prose wide">
+    <a class="back-link" href="/en/research/">← Research</a>
+
+    <header class="project-header">
+      <div class="status-row">
+        <span class="status">{displayStatus}</span>
+        <span>{displayType}</span>
+        <span>{year}</span>
+      </div>
+
+      <h1>{displayTitle}</h1>
+      {displaySubtitle && <p class="project-subtitle">{displaySubtitle}</p>}
+
+      <p class="metadata">
+        Authorship: {authors.join(", ")}
+        {roleEn ? ` · Augusto Rico's role: ${roleEn}` : ""}
+      </p>
+
+      {contributors.length > 0 && (
+        <p class="metadata">
+          {contributors.map((item) => `${item.name} — ${item.roleEn ?? item.role}`).join(" · ")}
+        </p>
+      )}
+
+      <div class="actions">
+        {pdf && <a class="button primary" href={pdf} target="_blank" rel="noreferrer">View PDF</a>}
+        {repository && <a class="button" href={repository} target="_blank" rel="noreferrer">Source on GitHub</a>}
+        {citekey && <a class="button" href={`/citations/${project.id}.bib`}>BibTeX</a>}
+        <a class="button" href={`/proyectos/${project.id}/`}>Español</a>
+      </div>
+    </header>
+
+    <div class="project-summary">
+      <h2>Summary</h2>
+      <p>{displaySummary}</p>
+    </div>
+
+    {sectionsEn.map((section) => (
+      <section>
+        <h2>{section.heading}</h2>
+        <p>{section.body}</p>
+      </section>
+    ))}
+
+    <h2>Topics</h2>
+    <ul class="tags">
+      {displayTopics.map((topic) => <li>{topic}</li>)}
+    </ul>
+
+    <p class="muted">
+      Updated: {updated.toLocaleDateString("en-US", { timeZone: "UTC" })}
+    </p>
+  </article>
+</BaseLayout>
