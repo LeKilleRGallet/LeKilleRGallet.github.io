@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use or reference material from this repository, cite the specific project page when available."
+title: "Augusto Rico - Research and Professional Portfolio"
+type: software
+authors:
+  - family-names: "Rico"
+    given-names: "Augusto"
+url: "https://lekillergallet.github.io/"
+repository-code: "https://github.com/LeKilleRGallet/LeKilleRGallet.github.io"
+date-released: "2026-09-18"
