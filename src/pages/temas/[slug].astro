@@ -1,0 +1,108 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { topicHubs } from "../../data/topics";
+import { archiveDocuments } from "../../data/archive";
+
+export function getStaticPaths() {
+  return topicHubs.map((topic) => ({
+    params: { slug: topic.slug },
+    props: { topic },
+  }));
+}
+
+const { topic } = Astro.props;
+const projects = (
+  await getCollection("proyectos", ({ data }) =>
+    data.public && topic.projectIds.includes(data.id as never)
+  )
+).sort((a, b) => b.data.year - a.data.year);
+
+const archive = archiveDocuments.filter((doc) =>
+  topic.archiveTitles.includes(doc.title as never)
+);
+
+const canonical = new URL(`/temas/${topic.slug}/`, Astro.site).toString();
+const personId = new URL("/#person", Astro.site).toString();
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": `${canonical}#topic`,
+  url: canonical,
+  name: topic.title,
+  description: topic.description,
+  inLanguage: "es",
+  about: {
+    "@type": "Thing",
+    name: topic.title,
+    keywords: topic.keywords.join(", "),
+  },
+  author: { "@type": "Person", "@id": personId, name: "Augusto Rico" },
+  hasPart: projects.map((p) => ({
+    "@type": p.data.type.toLowerCase().includes("proyecto") ? "ResearchProject" : "ScholarlyArticle",
+    name: p.data.title,
+    url: new URL(`/proyectos/${p.id}/`, Astro.site).toString(),
+  })),
+};
+---
+
+<BaseLayout
+  title={topic.title}
+  description={topic.description}
+  alternateEs={`/temas/${topic.slug}/`}
+  alternateEn={`/en/topics/${topic.slug}/`}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </Fragment>
+
+  <article class="prose wide">
+    <a class="back-link" href="/temas/">← Temas</a>
+    <header class="page-header">
+      <p class="eyebrow">Topic hub</p>
+      <h1>{topic.title}</h1>
+      <p>{topic.description}</p>
+    </header>
+
+    <h2>Evidencia publicada</h2>
+    {projects.length > 0 && (
+      <div class="project-grid">
+        {projects.map((project) => <ProjectCard proyecto={project} />)}
+      </div>
+    )}
+
+    {archive.length > 0 && (
+      <section class="section-block">
+        <h2>Archivo relacionado</h2>
+        <div class="archive-list">
+          {archive.map((doc) => (
+            <article class="archive-item">
+              <div>
+                <p class="metadata">{doc.type} · {doc.year}</p>
+                <h3>{doc.title}</h3>
+                <p>{doc.note}</p>
+              </div>
+              <a class="button" href={doc.href}>Abrir</a>
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <section class="section-block">
+      <h2>Palabras y métodos relacionados</h2>
+      <ul class="tags">
+        {topic.keywords.map((keyword) => <li>{keyword}</li>)}
+      </ul>
+    </section>
+
+    <section class="section-block">
+      <h2>Rutas relacionadas</h2>
+      <div class="actions">
+        {topic.relatedPages.map((page) => <a class="button" href={page.es}>{page.labelEs}</a>)}
+      </div>
+    </section>
+  </article>
+</BaseLayout>
