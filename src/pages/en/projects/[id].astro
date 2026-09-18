@@ -31,6 +31,8 @@ const {
   roleEn,
   summary,
   summaryEn,
+  seoTitleEn,
+  seoDescriptionEn,
   topics,
   topicsEn,
   sectionsEn,
@@ -124,8 +126,8 @@ const breadcrumbJsonLd = {
 ---
 
 <BaseLayout
-  title={displayTitle}
-  description={displaySummary}
+  title={seoTitleEn ?? displayTitle}
+  description={seoDescriptionEn ?? displaySummary}
   lang="en"
   alternateEs={`/proyectos/${project.id}/`}
   alternateEn={`/en/projects/${project.id}/`}
