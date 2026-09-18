@@ -1,5 +1,7 @@
 export const publicProfile = {
   name: "Augusto Rico",
+  legalName: "Augusto David Rico Dautt",
+  aliases: ["Augusto Rico", "LeKilleRGallet"],
   headline: "Economist · Data Analyst · Research",
   description:
     "Economista de la Universidad Nacional de Colombia y Analista I en la DIAN. Trabajo con datos, métodos cuantitativos e investigación aplicada.",

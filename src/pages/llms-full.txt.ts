@@ -48,7 +48,7 @@ Last updated: ${publicProfile.lastUpdated}
 
 ## Identity
 
-Name: ${publicProfile.name}
+Professional name: ${publicProfile.name}\nFull name: ${publicProfile.legalName}\nAliases: ${publicProfile.aliases.join(", ")}
 Headline: ${publicProfile.headline}
 Location: ${publicProfile.location.city}, ${publicProfile.location.country}
 Website: ${publicProfile.links.website}
