@@ -28,6 +28,8 @@ const {
   contributors,
   role,
   summary,
+  seoTitle,
+  seoDescription,
   topics,
   pdf,
   repository,
@@ -136,8 +138,8 @@ const breadcrumbJsonLd = {
 ---
 
 <BaseLayout
-  title={title}
-  description={summary}
+  title={seoTitle ?? title}
+  description={seoDescription ?? summary}
   alternateEs={`/proyectos/${proyecto.id}/`}
   alternateEn={`/en/projects/${proyecto.id}/`}
 >
