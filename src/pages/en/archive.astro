@@ -23,12 +23,12 @@ import { archiveDocuments } from "../../data/archive";
     {archiveDocuments.map((doc) => (
       <article class="archive-item">
         <div>
-          <p class="metadata">{doc.type} · {doc.authors.join(", ")} · {doc.year}</p>
-          <h2>{doc.title}</h2>
-          <p>{doc.note}</p>
+          <p class="metadata">{doc.typeEn} · {doc.authors.join(", ")} · {doc.year}</p>
+          <h2>{doc.titleEn}</h2>
+          <p>{doc.noteEn}</p>
           <ul class="tags">{doc.topics.map((topic) => <li>{topic}</li>)}</ul>
         </div>
-        <a class="button" href={doc.href} target={doc.href.startsWith("http") ? "_blank" : undefined} rel={doc.href.startsWith("http") ? "noreferrer" : undefined}>Open</a>
+        <a class="button" href={doc.hrefEn} target={doc.hrefEn.startsWith("http") ? "_blank" : undefined} rel={doc.hrefEn.startsWith("http") ? "noreferrer" : undefined}>Open</a>
       </article>
     ))}
   </div>
