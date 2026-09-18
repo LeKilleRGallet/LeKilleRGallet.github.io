@@ -13,7 +13,8 @@ export const GET = async ({ site }: any) => {
     status: p.data.status,
     year: p.data.year,
     authors: p.data.authors,
-    role: p.data.role ?? null,
+    contributors: p.data.contributors,
+    augustoRole: p.data.role ?? null,
     summary: p.data.summary,
     topics: p.data.topics,
     url: new URL(`/proyectos/${p.id}/`, site).toString(),
@@ -28,10 +29,10 @@ export const GET = async ({ site }: any) => {
   return new Response(
     JSON.stringify(
       {
-        schemaVersion: "1.0",
+        schemaVersion: "1.1",
         canonicalSource: new URL("/api/research.json", site).toString(),
         disclaimer:
-          "Los estados distinguen working papers, manuscritos y proyectos de publicaciones revisadas por pares.",
+          "Los estados, autoría y roles se mantienen separados. Working papers, manuscritos, proyectos y trabajos de curso no son publicaciones revisadas por pares salvo indicación explícita.",
         items,
       },
       null,
