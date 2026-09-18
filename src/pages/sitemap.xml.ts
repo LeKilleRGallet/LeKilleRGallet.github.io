@@ -1,5 +1,6 @@
 import { getCollection } from "astro:content";
 import { publicProfile } from "../data/publicProfile";
+import { topicHubs } from "../data/topics";
 
 const esc = (value: string) =>
   value
@@ -23,12 +24,22 @@ export const GET = async ({ site }: any) => {
     ["/colaborar/", "/en/collaborate/"],
     ["/cv/", "/en/cv/"],
     ["/contacto/", "/en/contact/"],
+    ["/temas/", "/en/topics/"],
   ];
 
   const pairedPages = pairs.flatMap(([esPath, enPath]) => [
     { path: esPath, esPath, enPath, lastmod: publicProfile.lastUpdated },
     { path: enPath, esPath, enPath, lastmod: publicProfile.lastUpdated },
   ]);
+
+  const topicPages = topicHubs.flatMap((topic) => {
+    const esPath = `/temas/${topic.slug}/`;
+    const enPath = `/en/topics/${topic.slug}/`;
+    return [
+      { path: esPath, esPath, enPath, lastmod: publicProfile.lastUpdated },
+      { path: enPath, esPath, enPath, lastmod: publicProfile.lastUpdated },
+    ];
+  });
 
   const projectPages = projects.flatMap((p) => {
     const esPath = `/proyectos/${p.id}/`;
@@ -47,7 +58,7 @@ export const GET = async ({ site }: any) => {
       lastmod: p.data.updated.toISOString().slice(0, 10),
     }));
 
-  const pairedXml = [...pairedPages, ...projectPages]
+  const pairedXml = [...pairedPages, ...topicPages, ...projectPages]
     .map(({ path, esPath, enPath, lastmod }) => {
       const loc = new URL(path, site).toString();
       const esUrl = new URL(esPath, site).toString();

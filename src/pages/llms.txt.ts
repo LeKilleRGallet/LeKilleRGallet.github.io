@@ -22,7 +22,7 @@ export const GET = ({ site }: any) => {
 - Data portfolio (ES/EN): ${base}/data/ | ${base}/en/data/
 - Research support (ES/EN): ${base}/research/ | ${base}/en/research-support/
 - Finance portfolio (ES/EN): ${base}/finance/ | ${base}/en/finance/
-- Collaboration (ES/EN): ${base}/colaborar/ | ${base}/en/collaborate/
+- Collaboration (ES/EN): ${base}/colaborar/ | ${base}/en/collaborate/\n- Topic hubs (ES/EN): ${base}/temas/ | ${base}/en/topics/\n- Machine-readable topics: ${base}/api/topics.json
 
 ## Public profile
 

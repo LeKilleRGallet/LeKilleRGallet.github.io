@@ -29,14 +29,14 @@ o interno de DIAN debe publicarse aquí.
 - `/llms-full.txt`
 - `/api/profile.json`
 - `/api/research.json`
-- `/api/archive.json`
+- `/api/archive.json`\n- `/api/topics.json`
 
 ## Qué contiene
 
 - home profesional;
 - `/sobre-mi/` como perfil canónico;
 - `/data/`, `/research/` y `/finance/` como landings;
-- `/investigacion/` y fichas de proyectos;
+- `/investigacion/` y fichas de proyectos;\n- `/temas/` y `/en/topics/` como hubs temáticos basados en evidencia;
 - `/archivo/` de PDFs y trabajos académicos;
 - `/agenda/` para ideas todavía no convertidas en manuscritos;
 - `/colaborar/` para trabajo por proyecto;

@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { topicHubs } from "../../data/topics";
 
 export async function getStaticPaths() {
   const proyectos = await getCollection("proyectos", ({ data }) => data.public);
@@ -13,6 +14,9 @@ export async function getStaticPaths() {
 
 const { proyecto } = Astro.props;
 const { Content } = await render(proyecto);
+const relatedTopicHubs = topicHubs.filter((hub) =>
+  (hub.projectIds as readonly string[]).includes(proyecto.id)
+);
 
 const {
   title,
@@ -199,6 +203,18 @@ const breadcrumbJsonLd = {
           Esta referencia identifica un working paper o manuscrito alojado en este sitio.
           No implica DOI, publicación en revista ni revisión por pares.
         </p>
+      </section>
+    )}
+
+    {relatedTopicHubs.length > 0 && (
+      <section class="section-block">
+        <p class="eyebrow">Contexto temático</p>
+        <h2>Explorar por área</h2>
+        <div class="actions">
+          {relatedTopicHubs.map((hub) => (
+            <a class="button" href={`/temas/${hub.slug}/`}>{hub.title}</a>
+          ))}
+        </div>
       </section>
     )}
 
