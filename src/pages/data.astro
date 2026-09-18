@@ -1,0 +1,53 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TrackedLanding from "../components/TrackedLanding.astro";
+---
+
+<BaseLayout
+  title="Data & BI"
+  description="Portafolio de datos de Augusto Rico: Python, SQL, PySpark, Databricks, Power BI, automatización y data quality."
+>
+  <header class="page-header">
+    <p class="eyebrow">Data · BI · Automation</p>
+    <h1>Datos para decisiones.</h1>
+    <p>
+      Trabajo con bases administrativas, pipelines reproducibles, calidad de datos,
+      automatización, segmentación y visualización.
+    </p>
+  </header>
+
+  <div class="capability-grid">
+    <article class="capability">
+      <span class="number">01</span>
+      <h3>Data pipelines</h3>
+      <p>Extracción, limpieza, transformación, validación, deduplicación y agregación con Python, SQL, PySpark y Databricks.</p>
+    </article>
+    <article class="capability">
+      <span class="number">02</span>
+      <h3>Analytics</h3>
+      <p>Indicadores, clasificación, segmentación, análisis de comportamiento y evaluación de modelos.</p>
+    </article>
+    <article class="capability">
+      <span class="number">03</span>
+      <h3>BI</h3>
+      <p>Power BI, Excel y reportes para audiencias técnicas y de gestión.</p>
+    </article>
+  </div>
+
+  <section class="section-block">
+    <p class="eyebrow">Stack</p>
+    <ul class="tags">
+      <li>Python</li><li>SQL</li><li>PySpark</li><li>Azure Databricks</li>
+      <li>Power BI</li><li>Excel</li><li>Pandas</li><li>scikit-learn</li>
+      <li>Git</li><li>LaTeX</li>
+    </ul>
+
+    <div class="actions">
+      <a class="button primary" href="/colaborar/">Trabajar conmigo</a>
+      <a class="button" href="/cv/">CV</a>
+      <a class="button" href="/archivo/">Archivo técnico</a>
+    </div>
+  </section>
+
+  <TrackedLanding label="Esta página puede registrar una visita anónima cuando se abre desde una candidatura rastreada." />
+</BaseLayout>
