@@ -1,4 +1,4 @@
-﻿import { defineCollection } from "astro:content";
+import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
@@ -15,9 +15,11 @@ const proyectos = defineCollection({
     status: z.string(),
     year: z.number().int(),
     authors: z.array(z.string()).min(1),
+    role: z.string().optional(),
     summary: z.string(),
     topics: z.array(z.string()).default([]),
     pdf: z.string().optional(),
+    repository: z.string().url().optional(),
     public: z.boolean().default(false),
     featured: z.boolean().default(false),
     updated: z.coerce.date(),
