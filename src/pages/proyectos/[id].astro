@@ -21,6 +21,7 @@ const {
   status,
   year,
   authors,
+  contributors,
   role,
   summary,
   topics,
@@ -33,6 +34,14 @@ const {
 
 const canonical = new URL(`/proyectos/${proyecto.id}/`, Astro.site).toString();
 const pdfUrl = pdf ? new URL(pdf, Astro.site).toString() : undefined;
+const personId = new URL("/#person", Astro.site).toString();
+const websiteId = new URL("/#website", Astro.site).toString();
+
+const personRef = (name: string) =>
+  name === "Augusto Rico"
+    ? { "@type": "Person", "@id": personId, name }
+    : { "@type": "Person", name };
+
 const citationText = `${authors.join(", ")} (${year}). ${title}. ${status}. ${canonical}`;
 const bibtex = citekey
   ? `@${citationType}{${citekey},
@@ -45,33 +54,95 @@ const bibtex = citekey
 }`
   : undefined;
 
-const scholarlyJsonLd = {
+const schemaType = type.toLowerCase().includes("proyecto")
+  ? "ResearchProject"
+  : "ScholarlyArticle";
+
+const creativeJsonLd =
+  schemaType === "ResearchProject"
+    ? {
+        "@context": "https://schema.org",
+        "@type": "ResearchProject",
+        "@id": `${canonical}#research-project`,
+        name: title,
+        description: summary,
+        startDate: `${year}-01-01`,
+        dateModified: updated.toISOString().slice(0, 10),
+        url: canonical,
+        keywords: topics.join(", "),
+        author: authors.map(personRef),
+        contributor: contributors.map((item) => ({
+          ...personRef(item.name),
+          description: item.role,
+        })),
+        isPartOf: { "@id": websiteId },
+      }
+    : {
+        "@context": "https://schema.org",
+        "@type": "ScholarlyArticle",
+        "@id": `${canonical}#work`,
+        headline: title,
+        name: title,
+        description: summary,
+        author: authors.map(personRef),
+        contributor: contributors.map((item) => ({
+          ...personRef(item.name),
+          description: item.role,
+        })),
+        datePublished: String(year),
+        dateModified: updated.toISOString().slice(0, 10),
+        url: canonical,
+        mainEntityOfPage: canonical,
+        isPartOf: { "@id": websiteId },
+        keywords: topics.join(", "),
+        encoding: pdfUrl
+          ? {
+              "@type": "MediaObject",
+              contentUrl: pdfUrl,
+              encodingFormat: "application/pdf",
+            }
+          : undefined,
+        creativeWorkStatus: status,
+      };
+
+const breadcrumbJsonLd = {
   "@context": "https://schema.org",
-  "@type": "ScholarlyArticle",
-  headline: title,
-  name: title,
-  description: summary,
-  author: authors.map((name) => ({ "@type": "Person", name })),
-  datePublished: String(year),
-  dateModified: updated.toISOString().slice(0, 10),
-  url: canonical,
-  keywords: topics.join(", "),
-  encoding: pdfUrl
-    ? { "@type": "MediaObject", contentUrl: pdfUrl, encodingFormat: "application/pdf" }
-    : undefined,
-  creativeWorkStatus: status
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Inicio",
+      item: new URL("/", Astro.site).toString(),
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Investigación",
+      item: new URL("/investigacion/", Astro.site).toString(),
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: title,
+      item: canonical,
+    },
+  ],
 };
 ---
 
 <BaseLayout title={title} description={summary}>
   <Fragment slot="head">
-    <meta name="citation_title" content={title} />
-    {authors.map((author) => <meta name="citation_author" content={author} />)}
-    <meta name="citation_publication_date" content={String(year)} />
-    <meta name="citation_abstract_html_url" content={canonical} />
-    {pdfUrl && <meta name="citation_pdf_url" content={pdfUrl} />}
-    {topics.map((topic) => <meta name="citation_keywords" content={topic} />)}
-    <script type="application/ld+json" set:html={JSON.stringify(scholarlyJsonLd)} />
+    {citekey && <meta name="citation_title" content={title} />}
+    {citekey && authors.map((author) => <meta name="citation_author" content={author} />)}
+    {citekey && <meta name="citation_publication_date" content={String(year)} />}
+    {citekey && <meta name="citation_abstract_html_url" content={canonical} />}
+    {citekey && <meta name="citation_fulltext_html_url" content={canonical} />}
+    {citekey && pdfUrl && <meta name="citation_pdf_url" content={pdfUrl} />}
+    {citekey && topics.map((topic) => <meta name="citation_keywords" content={topic} />)}
+    {citekey && <link rel="alternate" type="application/x-bibtex" href={`/citations/${proyecto.id}.bib`} />}
+    <script type="application/ld+json" set:html={JSON.stringify(creativeJsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
   </Fragment>
 
   <article class="prose wide">
@@ -87,7 +158,16 @@ const scholarlyJsonLd = {
       <h1>{title}</h1>
       {subtitle && <p class="project-subtitle">{subtitle}</p>}
 
-      <p class="metadata">{authors.join(", ")}{role ? ` · ${role}` : ""}</p>
+      <p class="metadata">
+        Autoría: {authors.join(", ")}
+        {role ? ` · Rol de Augusto Rico: ${role}` : ""}
+      </p>
+
+      {contributors.length > 0 && (
+        <p class="metadata">
+          {contributors.map((item) => `${item.name} — ${item.role}`).join(" · ")}
+        </p>
+      )}
 
       <div class="actions">
         {pdf && <a class="button primary" href={pdf} target="_blank" rel="noreferrer">Ver PDF</a>}

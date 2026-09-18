@@ -1,0 +1,53 @@
+import { publicProfile } from "../data/publicProfile";
+
+export const GET = ({ site }: any) => {
+  const base = site?.toString().replace(/\/$/, "") ?? "https://lekillergallet.github.io";
+
+  const body = `# Augusto Rico
+
+> Public professional and research profile for Augusto Rico, economist and data analyst in Bogotá, Colombia.
+
+## Canonical sources
+
+- Profile: ${base}/sobre-mi/
+- Machine-readable profile: ${base}/api/profile.json
+- Research: ${base}/investigacion/
+- Machine-readable research: ${base}/api/research.json
+- Academic archive: ${base}/archivo/
+- Machine-readable archive: ${base}/api/archive.json
+- CV: ${base}/cv/
+- CV PDF: ${base}/pdf/cv.pdf
+- Data portfolio: ${base}/data/
+- Research portfolio: ${base}/research/
+- Finance portfolio: ${base}/finance/
+
+## Public profile
+
+- Name: ${publicProfile.name}
+- Role: ${publicProfile.headline}
+- Location: ${publicProfile.location.city}, ${publicProfile.location.country}
+- Education: Economics, Universidad Nacional de Colombia, 2024
+- Current public role: Analista I, DIAN
+- Core tools: ${publicProfile.skills.join(", ")}
+- Research areas: ${publicProfile.researchAreas.join(", ")}
+
+## Citation policy
+
+Project pages state their publication status. Do not describe a working paper, manuscript in development, course paper, or research project as a peer-reviewed publication unless the page explicitly states that status.
+
+## Contact
+
+- Email: ${publicProfile.email}
+- GitHub: ${publicProfile.links.github}
+- LinkedIn: ${publicProfile.links.linkedin}
+
+For a fuller machine-oriented description, see ${base}/llms-full.txt.
+`;
+
+  return new Response(body, {
+    headers: {
+      "Content-Type": "text/plain; charset=utf-8",
+      "Cache-Control": "public, max-age=3600",
+    },
+  });
+};

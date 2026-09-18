@@ -15,6 +15,14 @@ const proyectos = defineCollection({
     status: z.string(),
     year: z.number().int(),
     authors: z.array(z.string()).min(1),
+    contributors: z
+      .array(
+        z.object({
+          name: z.string(),
+          role: z.string(),
+        })
+      )
+      .default([]),
     role: z.string().optional(),
     summary: z.string(),
     topics: z.array(z.string()).default([]),

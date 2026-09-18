@@ -1,17 +1,19 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { publicProfile } from "../data/publicProfile";
 ---
 
 <BaseLayout
-  title="Colaborar"
-  description="Áreas en las que Augusto Rico puede apoyar proyectos de datos, investigación y análisis económico."
+  title="Economista y Data Analyst freelance en Colombia"
+  description="Augusto Rico está disponible para proyectos remotos, part-time y por entregables en análisis de datos, Power BI, Python, SQL, research support, econometría y análisis económico desde Bogotá, Colombia."
 >
   <header class="page-header">
     <p class="eyebrow">Projects & collaboration</p>
     <h1>Trabajo por proyecto.</h1>
     <p>
-      Estoy disponible para colaboraciones remotas, part-time o por entregables
-      en proyectos donde economía, datos y métodos cuantitativos se crucen.
+      Estoy disponible desde Bogotá para colaboraciones remotas, part-time,
+      freelance o por entregables en proyectos donde economía, datos y métodos
+      cuantitativos se crucen.
     </p>
   </header>
 
@@ -19,17 +21,26 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <article class="capability">
       <span class="number">01</span>
       <h3>Data & BI</h3>
-      <p>Limpieza, integración, validación, automatización, indicadores, SQL/Python y Power BI.</p>
+      <p>
+        Limpieza, integración, validación, automatización, indicadores,
+        Python, SQL, PySpark, Databricks, Excel y Power BI.
+      </p>
     </article>
     <article class="capability">
       <span class="number">02</span>
       <h3>Research support</h3>
-      <p>Revisión de literatura, construcción de bases, análisis cuantitativo, visualización y reproducibilidad.</p>
+      <p>
+        Revisión de literatura, construcción de bases, análisis cuantitativo,
+        visualización, reproducibilidad y apoyo metodológico.
+      </p>
     </article>
     <article class="capability">
       <span class="number">03</span>
       <h3>Economic analysis</h3>
-      <p>Economía aplicada, riesgo, comportamiento, política pública, mercados y métodos econométricos.</p>
+      <p>
+        Economía aplicada, riesgo, comportamiento, política pública, mercados,
+        econometría, series de tiempo y evaluación de evidencia.
+      </p>
     </article>
   </div>
 
@@ -39,9 +50,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <p class="eyebrow">Stack</p>
         <h2>Herramientas</h2>
         <ul class="tags">
-          <li>Python</li><li>SQL</li><li>PySpark</li><li>Databricks</li>
-          <li>Power BI</li><li>Excel</li><li>Pandas</li><li>scikit-learn</li>
-          <li>Git</li><li>LaTeX</li>
+          {publicProfile.skills.map((skill) => <li>{skill}</li>)}
         </ul>
       </div>
       <div>
@@ -50,9 +59,25 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <p>
           Proyectos definidos por entregables, soporte analítico por horas,
           research assistance, construcción de prototipos o colaboración en
-          equipos de datos e investigación.
+          equipos de datos, economía e investigación.
+        </p>
+        <p>
+          La información pública del sitio describe métodos y capacidades;
+          cualquier colaboración debe respetar mis obligaciones laborales y
+          no utilizar información interna o reservada.
         </p>
       </div>
+    </div>
+  </section>
+
+  <section class="section-block">
+    <p class="eyebrow">Portfolio</p>
+    <h2>Elige el punto de entrada.</h2>
+    <div class="actions">
+      <a class="button" href="/data/">Data & BI</a>
+      <a class="button" href="/research/">Research</a>
+      <a class="button" href="/finance/">Finance & Quant</a>
+      <a class="button" href="/archivo/">Archivo académico</a>
     </div>
   </section>
 
@@ -62,6 +87,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <h2>Cuéntame el problema y los datos disponibles.</h2>
       <p>Responderé indicando alcance, método y si el proyecto encaja con mi experiencia.</p>
     </div>
-    <a class="button primary" href="mailto:aricolkg@gmail.com?subject=Proyecto%20/%20colaboración">Escribir</a>
+    <a class="button primary" href={`mailto:${publicProfile.email}?subject=Proyecto%20/%20colaboración`}>Escribir</a>
   </section>
 </BaseLayout>
