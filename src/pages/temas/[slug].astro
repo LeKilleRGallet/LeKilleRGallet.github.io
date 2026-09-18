@@ -14,8 +14,8 @@ export function getStaticPaths() {
 
 const { topic } = Astro.props;
 const projects = (
-  await getCollection("proyectos", ({ data }) =>
-    data.public && topic.projectIds.includes(data.id as never)
+  await getCollection("proyectos", (entry) =>
+    entry.data.public && topic.projectIds.includes(entry.id as never)
   )
 ).sort((a, b) => b.data.year - a.data.year);
 
