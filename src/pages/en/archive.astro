@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { archiveDocuments } from "../../data/archive";
+---
+
+<BaseLayout
+  title="Academic Archive"
+  description="Public archive of working papers, econometrics assignments, time-series work and academic documents by Augusto Rico."
+  lang="en"
+  alternateEs="/archivo/"
+  alternateEn="/en/archive/"
+>
+  <header class="page-header">
+    <p class="eyebrow">Academic archive</p>
+    <h1>Documents and evidence of work.</h1>
+    <p>
+      This archive links to PDFs already available in my repositories. Coursework
+      and essays are labelled as such and are not presented as peer-reviewed publications.
+    </p>
+  </header>
+
+  <div class="archive-list">
+    {archiveDocuments.map((doc) => (
+      <article class="archive-item">
+        <div>
+          <p class="metadata">{doc.type} · {doc.authors.join(", ")} · {doc.year}</p>
+          <h2>{doc.title}</h2>
+          <p>{doc.note}</p>
+          <ul class="tags">{doc.topics.map((topic) => <li>{topic}</li>)}</ul>
+        </div>
+        <a class="button" href={doc.href} target={doc.href.startsWith("http") ? "_blank" : undefined} rel={doc.href.startsWith("http") ? "noreferrer" : undefined}>Open</a>
+      </article>
+    ))}
+  </div>
+
+  <p class="tracking-note">Machine-readable version: <a href="/api/archive.json">/api/archive.json</a></p>
+</BaseLayout>
