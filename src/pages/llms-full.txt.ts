@@ -19,7 +19,10 @@ export const GET = async ({ site }: any) => {
 - Augusto Rico role: ${p.data.role ?? "N/A"}
 - Summary: ${p.data.summary}
 - Topics: ${p.data.topics.join(", ")}
-- Canonical URL: ${base}/proyectos/${p.id}/
+- Spanish URL: ${base}/proyectos/${p.id}/
+- English title: ${p.data.titleEn ?? p.data.title}
+- English summary: ${p.data.summaryEn ?? p.data.summary}
+- English URL: ${base}/en/projects/${p.id}/
 - PDF: ${p.data.pdf ? base + p.data.pdf : "No public PDF listed"}
 - Source: ${p.data.repository ?? "No public source repository listed"}
 `
@@ -50,7 +53,7 @@ Academic email: ${publicProfile.academicEmail}
 
 ## Professional profile
 
-${publicProfile.description}
+${publicProfile.description}\nEnglish: ${publicProfile.descriptionEn}
 
 Current role: Analista I at DIAN since January 2025.
 Previous academic role: teaching assistant at Universidad Nacional de Colombia, 2022–2023.
