@@ -1,67 +1,117 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { publicProfile } from "../data/publicProfile";
+
+const personId = new URL("/#person", Astro.site).toString();
+const profileUrl = new URL("/sobre-mi/", Astro.site).toString();
+
+const profileJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": `${profileUrl}#profile`,
+  url: profileUrl,
+  name: `Perfil de ${publicProfile.name}`,
+  dateModified: publicProfile.lastUpdated,
+  mainEntity: {
+    "@type": "Person",
+    "@id": personId,
+    name: publicProfile.name,
+    alternateName: "LeKilleRGallet",
+    description: publicProfile.description,
+    url: publicProfile.links.website,
+    jobTitle: "Economist and Data Analyst",
+    email: `mailto:${publicProfile.email}`,
+    sameAs: [publicProfile.links.linkedin, publicProfile.links.github],
+    knowsAbout: [...publicProfile.skills, ...publicProfile.researchAreas],
+    alumniOf: publicProfile.education.map((education) => ({
+      "@type": "CollegeOrUniversity",
+      name: education.institution,
+    })),
+    worksFor: {
+      "@type": "Organization",
+      name: "DIAN — Dirección de Impuestos y Aduanas Nacionales",
+    },
+  },
+};
 ---
 
 <BaseLayout
   title="Sobre mí"
-  description="Perfil de Augusto Rico: economista, analista de datos e investigador en Bogotá."
+  description="Perfil público canónico de Augusto Rico: economista de la Universidad Nacional de Colombia, analista de datos e investigador en Bogotá."
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(profileJsonLd)} />
+  </Fragment>
+
   <article class="prose wide">
     <header class="page-header">
-      <p class="eyebrow">Perfil</p>
-      <h1>Sobre mí</h1>
-      <p>
-        Soy economista de la Universidad Nacional de Colombia y Analista I en
-        la Dirección de Impuestos y Aduanas Nacionales. Mi trabajo combina
-        análisis de datos, estadística, machine learning y producción de
-        evidencia para decisiones.
-      </p>
+      <p class="eyebrow">Perfil público canónico</p>
+      <h1>{publicProfile.name}</h1>
+      <p>{publicProfile.description}</p>
     </header>
 
     <div class="two-column">
       <section>
         <h2>Trabajo</h2>
-        <p>
-          Construyo flujos reproducibles para extracción, limpieza,
-          transformación, validación, deduplicación y agregación de información.
-          Trabajo con Python, SQL, PySpark, Azure Databricks, Excel y Power BI.
-        </p>
-        <p>
-          He aplicado clasificación supervisada, segmentación y análisis de
-          comportamiento sobre bases administrativas. La información pública de
-          este sitio describe métodos y experiencia; no publica datos internos ni
-          información reservada.
-        </p>
+        {publicProfile.experience.map((item) => (
+          <div class="cv-item">
+            <div>
+              <h3>{item.organization}</h3>
+              <p class="metadata">
+                {item.role} · {item.start}{item.current ? " — actualidad" : item.end ? ` — ${item.end}` : ""}
+              </p>
+            </div>
+            <p>{item.publicSummary}</p>
+          </div>
+        ))}
       </section>
 
       <section>
         <h2>Investigación</h2>
         <p>
-          Mis líneas incluyen economía conductual, teoría de juegos, teoría de la
-          decisión, inferencia causal, redes, sistemas complejos, finanzas
-          cuantitativas y computational social science.
+          Mis líneas públicas de investigación incluyen {publicProfile.researchAreas.join(", ")}.
+          El sitio distingue entre working papers, manuscritos, proyectos, ensayos y
+          publicaciones para no atribuir un estatus que el trabajo no tenga.
         </p>
         <p>
-          También he sido monitor académico en Microeconomía III, Economía para
-          Ingenieros e Historia del Pensamiento Económico y participo como
-          codirector formal, por parte de la DIAN, en un proyecto sobre medición
-          multidimensional de informalidad tributaria.
+          Participo como codirector formal, por parte de la DIAN, en un proyecto
+          sobre medición multidimensional de informalidad tributaria empresarial.
         </p>
       </section>
     </div>
 
     <h2>Métodos y herramientas</h2>
     <ul class="tags">
-      <li>Python</li><li>SQL</li><li>PySpark</li><li>Azure Databricks</li>
-      <li>Power BI</li><li>Pandas</li><li>Machine Learning</li>
-      <li>Series de tiempo</li><li>Econometría</li><li>LaTeX</li><li>Git</li>
+      {[...publicProfile.skills, ...publicProfile.methods].map((item) => <li>{item}</li>)}
     </ul>
 
+    <h2>Educación</h2>
+    {publicProfile.education.map((education) => (
+      <p><strong>{education.degree}</strong> · {education.institution} · {education.year}</p>
+    ))}
+
     <h2>Idiomas</h2>
-    <p>Español nativo · Inglés profesional · Alemán profesional.</p>
+    <p>{publicProfile.languages.map((item) => `${item.language}: ${item.level}`).join(" · ")}</p>
+
+    <h2>Disponibilidad</h2>
+    <p>{publicProfile.availability.join(" · ")}</p>
+
+    <h2>Fuentes públicas relacionadas</h2>
+    <ul>
+      <li><a href="/api/profile.json">Perfil público en JSON</a></li>
+      <li><a href="/api/research.json">Investigación en JSON</a></li>
+      <li><a href="/llms.txt">Resumen para agentes y LLM</a></li>
+      <li><a href="/llms-full.txt">Contexto público extendido</a></li>
+      <li><a href="/feed.xml">Feed de investigación</a></li>
+    </ul>
+
+    <p class="muted">
+      Actualizado: {publicProfile.lastUpdated}. {publicProfile.publicDataPolicy}
+    </p>
 
     <div class="actions">
       <a class="button primary" href="/cv/">Ver CV</a>
+      <a class="button" href="/investigacion/">Investigación</a>
       <a class="button" href="/contacto/">Contacto</a>
     </div>
   </article>
