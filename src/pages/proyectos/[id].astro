@@ -1,12 +1,9 @@
-﻿---
+---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
-  const proyectos = await getCollection(
-    "proyectos",
-    ({ data }) => data.public
-  );
+  const proyectos = await getCollection("proyectos", ({ data }) => data.public);
 
   return proyectos.map((proyecto) => ({
     params: { id: proyecto.id },
@@ -24,49 +21,42 @@ const {
   status,
   year,
   authors,
+  role,
   summary,
   topics,
   pdf,
+  repository,
   updated,
 } = proyecto.data;
 ---
 
 <BaseLayout title={title} description={summary}>
-  <article class="prose">
-    <a href="/investigacion/"> Investigacin</a>
+  <article class="prose wide">
+    <a class="back-link" href="/investigacion/">← Investigación</a>
 
-    <p class="metadata">{type}  {status}  {year}</p>
+    <header class="project-header">
+      <div class="status-row">
+        <span class="status">{status}</span>
+        <span>{type}</span>
+        <span>{year}</span>
+      </div>
 
-    <h1>{title}</h1>
-    {subtitle && <h2>{subtitle}</h2>}
+      <h1>{title}</h1>
+      {subtitle && <p class="project-subtitle">{subtitle}</p>}
 
-    <p>{authors.join(", ")}</p>
+      <p class="metadata">{authors.join(", ")}{role ? ` · ${role}` : ""}</p>
 
-    <div class="actions">
-      {
-        pdf && (
-          <>
-            <a
-              class="button primary"
-              href={pdf}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Ver PDF
-            </a>
+      <div class="actions">
+        {pdf && <a class="button primary" href={pdf} target="_blank" rel="noreferrer">Ver PDF</a>}
+        {repository && <a class="button" href={repository} target="_blank" rel="noreferrer">Código / repositorio</a>}
+      </div>
+    </header>
 
-            <a class="button" href={pdf} download>
-              Descargar
-            </a>
-          </>
-        )
-      }
+    <div class="project-summary">
+      <h2>Resumen</h2>
+      <p>{summary}</p>
     </div>
 
-    <h2>Resumen</h2>
-    <p>{summary}</p>
-
-    <h2>Contenido</h2>
     <Content />
 
     <h2>Temas</h2>
@@ -75,11 +65,7 @@ const {
     </ul>
 
     <p class="muted">
-      Actualizado: {
-        updated.toLocaleDateString("es-CO", {
-          timeZone: "UTC",
-        })
-      }
+      Actualizado: {updated.toLocaleDateString("es-CO", { timeZone: "UTC" })}
     </p>
   </article>
 </BaseLayout>

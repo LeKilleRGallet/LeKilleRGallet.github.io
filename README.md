@@ -1,43 +1,69 @@
-# Astro Starter Kit: Minimal
+# LeKilleRGallet.github.io
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Sitio personal de Augusto Rico, construido con Astro y publicado con GitHub Pages.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Qué contiene
 
-## 🚀 Project Structure
+- perfil profesional y académico;
+- CV web y PDF;
+- working papers y manuscritos con estado explícito;
+- agenda de investigación;
+- página para colaboración por proyecto;
+- fichas de proyectos desde Astro Content Collections.
 
-Inside of your Astro project, you'll see the following folders and files:
+## Estructura
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+  components/
+  content/proyectos/
+  layouts/
+  pages/
+documentos/
+  cv/main.tex
+plantillas/proyecto/
+scripts/
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Los documentos LaTeX ubicados en `documentos/<slug>/main.tex` se compilan en GitHub Actions y se publican en `/pdf/<slug>.pdf`.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Desarrollo
 
-Any static assets, like images, can be placed in the `public/` directory.
+```bash
+npm ci
+npm run dev
+npm run build
+```
 
-## 🧞 Commands
+## Nuevo proyecto
 
-All commands are run from the root of the project, from a terminal:
+Desde PowerShell:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+```powershell
+nuevoASTRO nombre-del-proyecto
+```
 
-## 👀 Want to learn more?
+o directamente:
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+```powershell
+.\scripts\nuevo-proyecto.ps1 nombre-del-proyecto
+```
+
+Esto crea:
+
+- `documentos/<slug>/main.tex`
+- `src/content/proyectos/<slug>.md`
+
+La ficha queda privada por defecto (`public: false`) hasta que se revise.
+
+## Publicar
+
+```powershell
+publicarASTRO "mensaje del commit"
+```
+
+El script hace commit, push y observa el workflow de GitHub Pages.
+
+## Regla editorial
+
+Una entrada en `Investigación` debe indicar su estado real: working paper, manuscrito en desarrollo, proyecto, etc. Las ideas que todavía no son manuscritos deben aparecer en `/agenda/`, no como publicaciones terminadas.

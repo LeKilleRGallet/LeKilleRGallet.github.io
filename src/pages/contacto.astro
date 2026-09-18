@@ -1,14 +1,38 @@
-﻿---
+---
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Contacto">
+<BaseLayout
+  title="Contacto"
+  description="Contacto profesional y académico de Augusto Rico."
+>
   <article class="prose">
-    <p class="metadata">Contacto</p>
-    <h1>Contacto</h1>
-    <p>
-      Correo:
-      <a href="mailto:arico@unal.edu.co">arico@unal.edu.co</a>
-    </p>
+    <header class="page-header">
+      <p class="eyebrow">Contacto</p>
+      <h1>Hablemos.</h1>
+      <p>
+        Para proyectos de datos, investigación, colaboración académica o trabajo
+        por entregables, el canal principal es el correo.
+      </p>
+    </header>
+
+    <div class="contact-list">
+      <div>
+        <span>Profesional</span>
+        <a href="mailto:aricolkg@gmail.com">aricolkg@gmail.com</a>
+      </div>
+      <div>
+        <span>Académico</span>
+        <a href="mailto:arico@unal.edu.co">arico@unal.edu.co</a>
+      </div>
+      <div>
+        <span>LinkedIn</span>
+        <a href="https://www.linkedin.com/in/lekillergallet/" target="_blank" rel="noreferrer">linkedin.com/in/lekillergallet</a>
+      </div>
+      <div>
+        <span>GitHub</span>
+        <a href="https://github.com/LeKilleRGallet" target="_blank" rel="noreferrer">github.com/LeKilleRGallet</a>
+      </div>
+    </div>
   </article>
 </BaseLayout>

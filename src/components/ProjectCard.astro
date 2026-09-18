@@ -1,0 +1,24 @@
+---
+const { proyecto } = Astro.props;
+const { title, type, status, year, summary, topics } = proyecto.data;
+---
+
+<article class="card">
+  <div class="status-row">
+    <span class="status">{status}</span>
+    <span>{type}</span>
+    <span>{year}</span>
+  </div>
+
+  <h3 class="card-title">
+    <a href={`/proyectos/${proyecto.id}/`}>{title}</a>
+  </h3>
+
+  <p>{summary}</p>
+
+  <div class="card-footer">
+    <ul class="tags" aria-label="Temas">
+      {topics.slice(0, 4).map((topic) => <li>{topic}</li>)}
+    </ul>
+  </div>
+</article>

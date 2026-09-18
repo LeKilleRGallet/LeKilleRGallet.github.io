@@ -1,53 +1,83 @@
-﻿---
+---
 import "../styles/global.css";
 
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
 }
 
 const {
   title = "Augusto Rico",
-  description = "Portafolio acadmico de investigacin.",
+  description = "Economista y analista de datos. Investigación, economía, machine learning y política pública.",
+  image = "/favicon.svg",
 } = Astro.props;
 
-const fullTitle =
-  title === "Augusto Rico"
-    ? title
-    : `${title} | Augusto Rico`;
+const fullTitle = title === "Augusto Rico" ? title : `${title} | Augusto Rico`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const socialImage = new URL(image, Astro.site);
 ---
 
 <!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#111827" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+
     <title>{fullTitle}</title>
   </head>
 
   <body>
+    <a class="skip-link" href="#contenido">Ir al contenido</a>
+
     <header class="site-header">
       <div class="container navigation">
-        <a class="brand" href="/">Augusto Rico</a>
+        <a class="brand" href="/" aria-label="Augusto Rico, inicio">
+          <span class="brand-mark">AR</span>
+          <span>Augusto Rico</span>
+        </a>
 
-        <nav aria-label="Navegacin principal">
-          <a href="/investigacion/">Investigacin</a>
-          <a href="/sobre-mi/">Sobre m</a>
+        <nav aria-label="Navegación principal">
+          <a href="/investigacion/">Investigación</a>
+          <a href="/agenda/">Agenda</a>
+          <a href="/colaborar/">Colaborar</a>
           <a href="/cv/">CV</a>
-          <a href="/contacto/">Contacto</a>
+          <a href="/sobre-mi/">Sobre mí</a>
         </nav>
       </div>
     </header>
 
-    <main class="container">
+    <main id="contenido" class="container">
       <slot />
     </main>
 
     <footer class="site-footer">
-      <div class="container">
-         {new Date().getFullYear()} Augusto Rico
+      <div class="container footer-grid">
+        <div>
+          <strong>Augusto Rico</strong>
+          <p>Economía, datos e investigación.</p>
+        </div>
+
+        <div class="footer-links">
+          <a href="mailto:aricolkg@gmail.com">Email</a>
+          <a href="https://www.linkedin.com/in/lekillergallet/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href="https://github.com/LeKilleRGallet" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
       </div>
     </footer>
   </body>

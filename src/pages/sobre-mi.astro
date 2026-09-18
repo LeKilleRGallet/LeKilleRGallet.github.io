@@ -1,14 +1,68 @@
-﻿---
+---
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Sobre m">
-  <article class="prose">
-    <p class="metadata">Perfil</p>
-    <h1>Sobre m</h1>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Este contenido
-      ser reemplazado durante la organizacin del portafolio.
-    </p>
+<BaseLayout
+  title="Sobre mí"
+  description="Perfil de Augusto Rico: economista, analista de datos e investigador en Bogotá."
+>
+  <article class="prose wide">
+    <header class="page-header">
+      <p class="eyebrow">Perfil</p>
+      <h1>Sobre mí</h1>
+      <p>
+        Soy economista de la Universidad Nacional de Colombia y Analista I en
+        la Dirección de Impuestos y Aduanas Nacionales. Mi trabajo combina
+        análisis de datos, estadística, machine learning y producción de
+        evidencia para decisiones.
+      </p>
+    </header>
+
+    <div class="two-column">
+      <section>
+        <h2>Trabajo</h2>
+        <p>
+          Construyo flujos reproducibles para extracción, limpieza,
+          transformación, validación, deduplicación y agregación de información.
+          Trabajo con Python, SQL, PySpark, Azure Databricks, Excel y Power BI.
+        </p>
+        <p>
+          He aplicado clasificación supervisada, segmentación y análisis de
+          comportamiento sobre bases administrativas. La información pública de
+          este sitio describe métodos y experiencia; no publica datos internos ni
+          información reservada.
+        </p>
+      </section>
+
+      <section>
+        <h2>Investigación</h2>
+        <p>
+          Mis líneas incluyen economía conductual, teoría de juegos, teoría de la
+          decisión, inferencia causal, redes, sistemas complejos, finanzas
+          cuantitativas y computational social science.
+        </p>
+        <p>
+          También he sido monitor académico en Microeconomía III, Economía para
+          Ingenieros e Historia del Pensamiento Económico y participo como
+          codirector formal, por parte de la DIAN, en un proyecto sobre medición
+          multidimensional de informalidad tributaria.
+        </p>
+      </section>
+    </div>
+
+    <h2>Métodos y herramientas</h2>
+    <ul class="tags">
+      <li>Python</li><li>SQL</li><li>PySpark</li><li>Azure Databricks</li>
+      <li>Power BI</li><li>Pandas</li><li>Machine Learning</li>
+      <li>Series de tiempo</li><li>Econometría</li><li>LaTeX</li><li>Git</li>
+    </ul>
+
+    <h2>Idiomas</h2>
+    <p>Español nativo · Inglés profesional · Alemán profesional.</p>
+
+    <div class="actions">
+      <a class="button primary" href="/cv/">Ver CV</a>
+      <a class="button" href="/contacto/">Contacto</a>
+    </div>
   </article>
 </BaseLayout>

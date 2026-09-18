@@ -1,14 +1,90 @@
-﻿---
+---
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="CV">
-  <article class="prose">
-    <p class="metadata">Trayectoria</p>
-    <h1>Curriculum vitae</h1>
-    <p>
-      Lorem ipsum dolor sit amet. La informacin acadmica y profesional ser
-      incorporada por secciones.
-    </p>
+<BaseLayout
+  title="CV"
+  description="Curriculum vitae de Augusto Rico: economía, datos, investigación y docencia."
+>
+  <article class="prose wide">
+    <header class="page-header">
+      <p class="eyebrow">Curriculum vitae</p>
+      <h1>Augusto Rico</h1>
+      <p>
+        Economista · Data Analyst · Research · Python · SQL · PySpark ·
+        Databricks · Power BI
+      </p>
+      <div class="actions">
+        <a class="button primary" href="/pdf/cv.pdf" target="_blank" rel="noreferrer">Abrir PDF</a>
+        <a class="button" href="mailto:aricolkg@gmail.com">Contacto</a>
+      </div>
+    </header>
+
+    <section class="cv-section">
+      <h2>Experiencia</h2>
+      <div class="cv-item">
+        <div>
+          <h3>DIAN — Analista I</h3>
+          <p class="metadata">Bogotá · enero 2025 — actualidad</p>
+        </div>
+        <ul>
+          <li>Análisis e integración de datos administrativos para decisiones de formalización, cumplimiento, riesgo y política pública.</li>
+          <li>Flujos reproducibles con Python, SQL, PySpark y Azure Databricks.</li>
+          <li>Clasificación supervisada RNN/LSTM y segmentación K-means para análisis de comportamiento.</li>
+          <li>Indicadores, reportes y presentaciones para audiencias técnicas y de gestión.</li>
+        </ul>
+      </div>
+
+      <div class="cv-item">
+        <div>
+          <h3>Universidad Nacional de Colombia — Monitor académico</h3>
+          <p class="metadata">2022 — 2023</p>
+        </div>
+        <p>Microeconomía III, Economía para Ingenieros e Historia del Pensamiento Económico.</p>
+      </div>
+    </section>
+
+    <section class="cv-section">
+      <h2>Investigación</h2>
+      <ul>
+        <li><strong>RNN/LSTM vs GAM para series financieras</strong> — manuscrito en desarrollo; 477 acciones del S&amp;P 500, VIX, DXY, WTI, GARCH(1,1) y Markowitz.</li>
+        <li><strong>Unraveling the Dynamics of the Colombian Health System</strong> — working paper de economía conductual y teoría de juegos.</li>
+        <li><strong>Medición multidimensional de informalidad tributaria</strong> — codirección formal de investigación por parte de la DIAN.</li>
+      </ul>
+    </section>
+
+    <section class="cv-section">
+      <h2>Educación</h2>
+      <div class="cv-item">
+        <div>
+          <h3>Universidad Nacional de Colombia</h3>
+          <p class="metadata">Economía · 2024</p>
+        </div>
+        <p>
+          Cursos seleccionados: Finanzas Avanzadas, Matemáticas Financieras,
+          Teoría de Juegos, Economía Conductual, Modelos Lineales y Teoría
+          Estadística Multivariada.
+        </p>
+      </div>
+    </section>
+
+    <section class="cv-section">
+      <h2>Herramientas</h2>
+      <ul class="tags">
+        <li>Python</li><li>SQL</li><li>PySpark</li><li>Databricks</li>
+        <li>Power BI</li><li>Excel</li><li>Pandas</li><li>scikit-learn</li>
+        <li>Git</li><li>LaTeX</li>
+      </ul>
+    </section>
+
+    <section class="cv-section">
+      <h2>Idiomas y enlaces</h2>
+      <p>Español nativo · Inglés profesional · Alemán profesional.</p>
+      <p>
+        <a href="https://github.com/LeKilleRGallet" target="_blank" rel="noreferrer">GitHub</a>
+        ·
+        <a href="https://www.linkedin.com/in/lekillergallet/" target="_blank" rel="noreferrer">LinkedIn</a>
+      </p>
+    </section>
   </article>
 </BaseLayout>
