@@ -13,6 +13,7 @@ export const GET = async ({ site }: any) => {
 
   const staticPages = [
     "/",
+    "/en/",
     "/investigacion/",
     "/research/",
     "/data/",
