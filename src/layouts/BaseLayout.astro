@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { publicProfile } from "../data/publicProfile";
 
 interface Props {
   title?: string;
@@ -8,29 +9,55 @@ interface Props {
 }
 
 const {
-  title = "Augusto Rico",
-  description = "Economista y analista de datos. Investigación, economía, machine learning y política pública.",
+  title = publicProfile.name,
+  description = publicProfile.description,
   image = "/favicon.svg",
 } = Astro.props;
 
-const fullTitle = title === "Augusto Rico" ? title : `${title} | Augusto Rico`;
+const fullTitle = title === publicProfile.name ? title : `${title} | ${publicProfile.name}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL(image, Astro.site);
+const personId = new URL("/#person", Astro.site).toString();
+const websiteId = new URL("/#website", Astro.site).toString();
 
-const personJsonLd = {
+const graphJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Augusto Rico",
-  url: "https://lekillergallet.github.io/",
-  jobTitle: "Economist and Data Analyst",
-  sameAs: [
-    "https://github.com/LeKilleRGallet",
-    "https://www.linkedin.com/in/lekillergallet/"
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": websiteId,
+      url: publicProfile.links.website,
+      name: "Augusto Rico — Economics, Data & Research",
+      description: publicProfile.description,
+      inLanguage: ["es", "en"],
+      publisher: { "@id": personId },
+    },
+    {
+      "@type": "Person",
+      "@id": personId,
+      name: publicProfile.name,
+      url: publicProfile.links.website,
+      mainEntityOfPage: publicProfile.links.about,
+      jobTitle: "Economist and Data Analyst",
+      description: publicProfile.description,
+      email: `mailto:${publicProfile.email}`,
+      homeLocation: {
+        "@type": "Place",
+        name: `${publicProfile.location.city}, ${publicProfile.location.country}`,
+      },
+      alumniOf: publicProfile.education.map((education) => ({
+        "@type": "CollegeOrUniversity",
+        name: education.institution,
+      })),
+      worksFor: {
+        "@type": "Organization",
+        name: "DIAN — Dirección de Impuestos y Aduanas Nacionales",
+      },
+      knowsAbout: [...publicProfile.skills, ...publicProfile.researchAreas],
+      knowsLanguage: publicProfile.languages.map((x) => x.language),
+      sameAs: [publicProfile.links.github, publicProfile.links.linkedin],
+    },
   ],
-  alumniOf: {
-    "@type": "CollegeOrUniversity",
-    name: "Universidad Nacional de Colombia"
-  }
 };
 ---
 
@@ -40,22 +67,35 @@ const personJsonLd = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="author" content={publicProfile.name} />
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#111827" />
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+
     <link rel="canonical" href={canonical} />
+    <link rel="author" href="/sobre-mi/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title="Augusto Rico — Research & Portfolio"
+      href="/feed.xml"
+    />
+    <link rel="alternate" type="application/json" href="/api/profile.json" />
 
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Augusto Rico" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={socialImage} />
+    <meta property="og:locale" content="es_CO" />
 
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
 
-    <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(graphJsonLd)} />
     <slot name="head" />
 
     <title>{fullTitle}</title>
@@ -89,14 +129,15 @@ const personJsonLd = {
     <footer class="site-footer">
       <div class="container footer-grid">
         <div>
-          <strong>Augusto Rico</strong>
+          <strong>{publicProfile.name}</strong>
           <p>Economía, datos e investigación.</p>
         </div>
 
         <div class="footer-links">
-          <a href="mailto:aricolkg@gmail.com">Email</a>
-          <a href="https://www.linkedin.com/in/lekillergallet/" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a href="https://github.com/LeKilleRGallet" target="_blank" rel="noreferrer">GitHub</a>
+          <a href={`mailto:${publicProfile.email}`}>Email</a>
+          <a href={publicProfile.links.linkedin} target="_blank" rel="me noreferrer">LinkedIn</a>
+          <a href={publicProfile.links.github} target="_blank" rel="me noreferrer">GitHub</a>
+          <a href="/llms.txt">llms.txt</a>
         </div>
       </div>
     </footer>
