@@ -11,6 +11,8 @@ const proyectos = defineCollection({
   schema: z.object({
     title: z.string(),
     titleEn: z.string().optional(),
+    seoTitle: z.string().optional(),
+    seoTitleEn: z.string().optional(),
     subtitle: z.string().optional(),
     subtitleEn: z.string().optional(),
     type: z.string(),
@@ -32,6 +34,8 @@ const proyectos = defineCollection({
     roleEn: z.string().optional(),
     summary: z.string(),
     summaryEn: z.string().optional(),
+    seoDescription: z.string().optional(),
+    seoDescriptionEn: z.string().optional(),
     topics: z.array(z.string()).default([]),
     topicsEn: z.array(z.string()).optional(),
     sectionsEn: z
