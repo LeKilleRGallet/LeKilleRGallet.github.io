@@ -9,8 +9,8 @@ const projects = (
 ---
 
 <BaseLayout
-  title="Research"
-  description="Working papers, research manuscripts and projects by Augusto Rico in economics, quantitative methods, behavioral economics, finance and public policy."
+  title="Economics & Data Research"
+  description="Research by Augusto Rico in economics, quantitative methods, behavioral economics, finance, data analysis, tax compliance and public policy."
   lang="en"
   alternateEs="/investigacion/"
   alternateEn="/en/research/"
@@ -27,6 +27,28 @@ const projects = (
   <div class="project-grid">
     {projects.map((project) => <ProjectCard proyecto={project} lang="en" />)}
   </div>
+
+  <section class="section-block">
+    <div class="two-column">
+      <div>
+        <p class="eyebrow">Method</p>
+        <h2>Explicit status and reproducible evidence.</h2>
+        <p>
+          Each project page separates authorship, role, work status, PDF and source
+          whenever they exist. This distinguishes working papers, manuscripts and
+          research projects without overstating publication status.
+        </p>
+      </div>
+      <div>
+        <p class="eyebrow">Connections</p>
+        <p>
+          Projects connect to evidence-based topic hubs in econometrics, behavioral
+          economics, quantitative finance, data analytics and tax compliance.
+        </p>
+        <a class="button" href="/en/topics/">Explore topics</a>
+      </div>
+    </div>
+  </section>
 
   <section class="section-block compact">
     <div class="callout">
