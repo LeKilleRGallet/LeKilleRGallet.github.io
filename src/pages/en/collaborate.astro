@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { publicProfile } from "../../data/publicProfile";
+---
+
+<BaseLayout
+  title="Freelance Economist & Data Analyst in Colombia"
+  description="Augusto Rico is available for remote, part-time and project-based work in data analysis, Power BI, Python, SQL, research support, econometrics and economic analysis."
+  lang="en"
+  alternateEs="/colaborar/"
+  alternateEn="/en/collaborate/"
+>
+  <header class="page-header">
+    <p class="eyebrow">Projects & collaboration</p>
+    <h1>Project-based work.</h1>
+    <p>
+      I am available from Bogotá for remote, part-time, freelance and deliverable-based
+      projects at the intersection of economics, data and quantitative methods.
+    </p>
+  </header>
+
+  <div class="capability-grid">
+    <article class="capability"><span class="number">01</span><h3>Data & BI</h3><p>Cleaning, integration, validation, automation, indicators, Python, SQL, PySpark, Databricks, Excel and Power BI.</p></article>
+    <article class="capability"><span class="number">02</span><h3>Research support</h3><p>Literature review, dataset construction, quantitative analysis, visualization, reproducibility and methodological support.</p></article>
+    <article class="capability"><span class="number">03</span><h3>Economic analysis</h3><p>Applied economics, risk, behavioral economics, public policy, markets, econometrics and time series.</p></article>
+  </div>
+
+  <section class="section-block">
+    <div class="actions">
+      <a class="button" href="/en/data/">Data & BI</a>
+      <a class="button" href="/en/research-support/">Research support</a>
+      <a class="button" href="/en/finance/">Finance & Quant</a>
+      <a class="button" href="/en/archive/">Academic archive</a>
+    </div>
+  </section>
+
+  <section class="callout">
+    <div>
+      <p class="eyebrow">Contact</p>
+      <h2>Tell me about the problem and the available data.</h2>
+      <p>I will respond with the likely scope, method and whether the project fits my experience.</p>
+    </div>
+    <a class="button primary" href={`mailto:${publicProfile.email}?subject=Project%20/%20collaboration`}>Email me</a>
+  </section>
+</BaseLayout>
