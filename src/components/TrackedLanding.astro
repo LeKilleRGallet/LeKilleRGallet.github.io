@@ -1,0 +1,33 @@
+---
+interface Props {
+  label?: string;
+}
+const { label = "Portfolio visit tracking" } = Astro.props;
+---
+
+<p class="tracking-note">{label}</p>
+
+<script is:inline>
+  (() => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("lt");
+    if (!token || !/^[A-Za-z0-9_-]{20,128}$/.test(token)) return;
+
+    const pixel = new Image(1, 1);
+    pixel.alt = "";
+    pixel.setAttribute("aria-hidden", "true");
+    pixel.referrerPolicy = "no-referrer";
+    pixel.style.position = "absolute";
+    pixel.style.width = "1px";
+    pixel.style.height = "1px";
+    pixel.style.opacity = "0";
+    pixel.style.pointerEvents = "none";
+    pixel.src = `https://augusto-email-tracker.arico.workers.dev/o/${token}.gif`;
+    document.body.appendChild(pixel);
+
+    params.delete("lt");
+    const query = params.toString();
+    const clean = window.location.pathname + (query ? `?${query}` : "") + window.location.hash;
+    window.history.replaceState({}, document.title, clean);
+  })();
+</script>
