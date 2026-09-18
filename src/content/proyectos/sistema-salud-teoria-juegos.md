@@ -1,6 +1,8 @@
 ---
 title: "Unraveling the Dynamics of the Colombian Health System: A Behavioral Analysis"
 titleEn: "Unraveling the Dynamics of the Colombian Health System: A Behavioral Analysis"
+seoTitle: "Salud colombiana y economía conductual"
+seoTitleEn: "Colombian Health System & Behavioral Economics"
 type: "Working paper"
 typeEn: "Working paper"
 status: "Working paper"
@@ -12,6 +14,8 @@ role: "Autor"
 roleEn: "Author"
 summary: "Working paper sobre interacciones entre EPS y pacientes, contrastando un modelo racional con mecanismos de economía conductual como prospect theory, loss aversion, underconfidence y normas sociales."
 summaryEn: "Working paper on interactions between Colombian health insurers (EPS) and patients, contrasting a rational model with behavioral mechanisms including prospect theory, loss aversion, underconfidence and social norms."
+seoDescription: "Working paper de Augusto Rico sobre EPS, pacientes, teoría de juegos y economía conductual en el sistema de salud colombiano."
+seoDescriptionEn: "Working paper by Augusto Rico on Colombian health insurers, patients, game theory and behavioral economics in the Colombian health system."
 topics:
   - "Behavioral Economics"
   - "Game Theory"
