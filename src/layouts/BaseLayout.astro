@@ -16,6 +16,22 @@ const {
 const fullTitle = title === "Augusto Rico" ? title : `${title} | Augusto Rico`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL(image, Astro.site);
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Augusto Rico",
+  url: "https://lekillergallet.github.io/",
+  jobTitle: "Economist and Data Analyst",
+  sameAs: [
+    "https://github.com/LeKilleRGallet",
+    "https://www.linkedin.com/in/lekillergallet/"
+  ],
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "Universidad Nacional de Colombia"
+  }
+};
 ---
 
 <!doctype html>
@@ -39,6 +55,9 @@ const socialImage = new URL(image, Astro.site);
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
 
+    <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+    <slot name="head" />
+
     <title>{fullTitle}</title>
   </head>
 
@@ -54,6 +73,7 @@ const socialImage = new URL(image, Astro.site);
 
         <nav aria-label="Navegación principal">
           <a href="/investigacion/">Investigación</a>
+          <a href="/archivo/">Archivo</a>
           <a href="/agenda/">Agenda</a>
           <a href="/colaborar/">Colaborar</a>
           <a href="/cv/">CV</a>
