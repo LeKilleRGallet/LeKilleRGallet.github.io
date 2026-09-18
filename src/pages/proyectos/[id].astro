@@ -26,11 +26,54 @@ const {
   topics,
   pdf,
   repository,
+  citekey,
+  citationType = "unpublished",
   updated,
 } = proyecto.data;
+
+const canonical = new URL(`/proyectos/${proyecto.id}/`, Astro.site).toString();
+const pdfUrl = pdf ? new URL(pdf, Astro.site).toString() : undefined;
+const citationText = `${authors.join(", ")} (${year}). ${title}. ${status}. ${canonical}`;
+const bibtex = citekey
+  ? `@${citationType}{${citekey},
+  author = {${authors.join(" and ")}},
+  title = {${title}},
+  year = {${year}},
+  note = {${status}},
+  url = {${canonical}}${pdfUrl ? `,
+  pdf = {${pdfUrl}}` : ""}
+}`
+  : undefined;
+
+const scholarlyJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  headline: title,
+  name: title,
+  description: summary,
+  author: authors.map((name) => ({ "@type": "Person", name })),
+  datePublished: String(year),
+  dateModified: updated.toISOString().slice(0, 10),
+  url: canonical,
+  keywords: topics.join(", "),
+  encoding: pdfUrl
+    ? { "@type": "MediaObject", contentUrl: pdfUrl, encodingFormat: "application/pdf" }
+    : undefined,
+  creativeWorkStatus: status
+};
 ---
 
 <BaseLayout title={title} description={summary}>
+  <Fragment slot="head">
+    <meta name="citation_title" content={title} />
+    {authors.map((author) => <meta name="citation_author" content={author} />)}
+    <meta name="citation_publication_date" content={String(year)} />
+    <meta name="citation_abstract_html_url" content={canonical} />
+    {pdfUrl && <meta name="citation_pdf_url" content={pdfUrl} />}
+    {topics.map((topic) => <meta name="citation_keywords" content={topic} />)}
+    <script type="application/ld+json" set:html={JSON.stringify(scholarlyJsonLd)} />
+  </Fragment>
+
   <article class="prose wide">
     <a class="back-link" href="/investigacion/">← Investigación</a>
 
@@ -48,7 +91,8 @@ const {
 
       <div class="actions">
         {pdf && <a class="button primary" href={pdf} target="_blank" rel="noreferrer">Ver PDF</a>}
-        {repository && <a class="button" href={repository} target="_blank" rel="noreferrer">Código / repositorio</a>}
+        {repository && <a class="button" href={repository} target="_blank" rel="noreferrer">Fuente en GitHub</a>}
+        {citekey && <a class="button" href={`/citations/${proyecto.id}.bib`}>BibTeX</a>}
       </div>
     </header>
 
@@ -58,6 +102,19 @@ const {
     </div>
 
     <Content />
+
+    {citekey && (
+      <section class="citation-box" aria-labelledby="como-citar">
+        <p class="eyebrow">Citation</p>
+        <h2 id="como-citar">Cómo citar</h2>
+        <p>{citationText}</p>
+        <pre><code>{bibtex}</code></pre>
+        <p class="muted">
+          Esta referencia identifica un working paper o manuscrito alojado en este sitio.
+          No implica DOI, publicación en revista ni revisión por pares.
+        </p>
+      </section>
+    )}
 
     <h2>Temas</h2>
     <ul class="tags">

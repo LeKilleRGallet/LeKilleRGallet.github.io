@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const documentos = [
+  {
+    title: "Unraveling the Dynamics of the Colombian Health System: A Behavioral Analysis",
+    meta: "Working paper · Augusto Rico · 2023",
+    href: "/proyectos/sistema-salud-teoria-juegos/",
+    note: "Versión de trabajo con PDF y fuente."
+  },
+  {
+    title: "Trabajo Final Econometría 2022-2",
+    meta: "Trabajo académico · Augusto Rico, Luis Ángel Palacio Bayuelo y Diego Barreto",
+    href: "https://github.com/LeKilleRGallet/university/blob/master/econometrics/ECONOMETRIA1/Ensayo2022-2/Entrega%20Final%20Econometr%C3%ADa%20-%202022%20-2/main.pdf",
+    note: "PIB per cápita, progreso social, innovación, desigualdad y democracia."
+  },
+  {
+    title: "Trabajo 1 — Econometría II",
+    meta: "Trabajo académico · Augusto Rico, Mauricio Gomez y Diego Barreto",
+    href: "https://github.com/LeKilleRGallet/university/blob/master/econometrics/ECONOMETRIA2/Trabajo1/main.pdf",
+    note: "Box-Jenkins, ARMA/ARIMA y exportaciones de petróleo."
+  },
+  {
+    title: "Trabajo II — Series de Tiempo Multivariadas",
+    meta: "Trabajo académico · Augusto Rico y Mauricio Gomez",
+    href: "https://github.com/LeKilleRGallet/university/blob/master/econometrics/ECONOMETRIA2/Trabajo2/main.pdf",
+    note: "Cointegración entre plata y empresas mineras de plata."
+  },
+  {
+    title: "Existencia de la economía dual en Colombia",
+    meta: "Ensayo académico · Augusto Rico",
+    href: "https://github.com/LeKilleRGallet/university/blob/master/macroeconomics/macro2/Ensayo/main.pdf",
+    note: "Centro-periferia, productividad, ingresos y economía dual."
+  },
+  {
+    title: "¿Pueden los mecanismos neoclásicos de mercado ayudarnos a lograr una redistribución justa de la tierra?",
+    meta: "Ensayo académico · Augusto Rico",
+    href: "https://github.com/LeKilleRGallet/university/blob/master/microeconomics/Micro2/Ensayo/main.pdf",
+    note: "Reforma agraria, externalidades, asignación y bienestar."
+  }
+];
+---
+
+<BaseLayout
+  title="Archivo"
+  description="Archivo curado de trabajos, ensayos y documentos académicos de Augusto Rico."
+>
+  <header class="page-header">
+    <p class="eyebrow">Archive</p>
+    <h1>Documentos y evidencia de trabajo.</h1>
+    <p>
+      El archivo reúne PDFs ya existentes en mis repositorios. Los documentos de curso
+      y ensayos se etiquetan como tales y no se presentan como publicaciones revisadas por pares.
+    </p>
+  </header>
+
+  <div class="archive-list">
+    {documentos.map((doc) => (
+      <article class="archive-item">
+        <div>
+          <p class="metadata">{doc.meta}</p>
+          <h2>{doc.title}</h2>
+          <p>{doc.note}</p>
+        </div>
+        <a class="button" href={doc.href} target={doc.href.startsWith("http") ? "_blank" : undefined} rel={doc.href.startsWith("http") ? "noreferrer" : undefined}>
+          Abrir
+        </a>
+      </article>
+    ))}
+  </div>
+</BaseLayout>

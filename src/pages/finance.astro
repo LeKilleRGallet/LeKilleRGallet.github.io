@@ -1,0 +1,48 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TrackedLanding from "../components/TrackedLanding.astro";
+---
+
+<BaseLayout
+  title="Finance & Quant"
+  description="Perfil financiero y cuantitativo de Augusto Rico: series de tiempo, riesgo, volatilidad, portafolios y econometría."
+>
+  <header class="page-header">
+    <p class="eyebrow">Finance · Quant · Econometrics</p>
+    <h1>Finanzas y métodos cuantitativos.</h1>
+    <p>
+      Formación en economía y finanzas, investigación en series financieras y trabajos
+      de econometría de series de tiempo.
+    </p>
+  </header>
+
+  <div class="capability-grid">
+    <article class="capability">
+      <span class="number">01</span>
+      <h3>Forecasting</h3>
+      <p>Series de tiempo, LSTM, GAM, ARIMA y evaluación de pronósticos.</p>
+    </article>
+    <article class="capability">
+      <span class="number">02</span>
+      <h3>Risk & volatility</h3>
+      <p>Volatilidad, GARCH, indicadores de mercado y análisis cuantitativo.</p>
+    </article>
+    <article class="capability">
+      <span class="number">03</span>
+      <h3>Portfolio</h3>
+      <p>Optimización media-varianza, Markowitz y análisis de activos.</p>
+    </article>
+  </div>
+
+  <section class="section-block">
+    <p class="eyebrow">Selected work</p>
+    <h2>Trabajo relacionado</h2>
+    <div class="actions">
+      <a class="button primary" href="/proyectos/rnn-vs-gam-finanzas/">RNN/LSTM vs GAM</a>
+      <a class="button" href="https://github.com/LeKilleRGallet/university/blob/master/econometrics/ECONOMETRIA2/Trabajo1/main.pdf" target="_blank" rel="noreferrer">ARIMA / petróleo</a>
+      <a class="button" href="https://github.com/LeKilleRGallet/university/blob/master/econometrics/ECONOMETRIA2/Trabajo2/main.pdf" target="_blank" rel="noreferrer">Cointegración / plata</a>
+    </div>
+  </section>
+
+  <TrackedLanding label="Esta página puede registrar una visita anónima cuando se abre desde una candidatura rastreada." />
+</BaseLayout>

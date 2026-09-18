@@ -1,0 +1,52 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import TrackedLanding from "../components/TrackedLanding.astro";
+
+const proyectos = (
+  await getCollection("proyectos", ({ data }) => data.public)
+).sort((a, b) => b.data.year - a.data.year);
+---
+
+<BaseLayout
+  title="Research"
+  description="Investigación de Augusto Rico en economía, comportamiento, métodos cuantitativos, finanzas y política pública."
+>
+  <header class="page-header">
+    <p class="eyebrow">Research</p>
+    <h1>Investigación y métodos.</h1>
+    <p>
+      Working papers, manuscritos y proyectos con estado explícito, PDF cuando existe
+      una versión pública y metadatos para citación.
+    </p>
+  </header>
+
+  <div class="project-grid">
+    {proyectos.map((proyecto) => <ProjectCard proyecto={proyecto} />)}
+  </div>
+
+  <section class="section-block">
+    <div class="two-column">
+      <div>
+        <p class="eyebrow">PDF & citation</p>
+        <h2>Versiones identificables.</h2>
+        <p>
+          Las fichas pueden incluir PDF, fuente, BibTeX y una URL estable. El estado
+          distingue working papers y manuscritos de publicaciones revisadas por pares.
+        </p>
+      </div>
+      <div>
+        <p class="eyebrow">Archive</p>
+        <h2>Trabajos anteriores.</h2>
+        <p>
+          El archivo reúne documentos académicos y de cursos que sirven como evidencia
+          de métodos usados, sin presentarlos como publicaciones.
+        </p>
+        <a class="button" href="/archivo/">Ver archivo</a>
+      </div>
+    </div>
+  </section>
+
+  <TrackedLanding label="Esta página puede registrar una visita anónima cuando se abre desde una candidatura rastreada." />
+</BaseLayout>

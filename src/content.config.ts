@@ -20,6 +20,8 @@ const proyectos = defineCollection({
     topics: z.array(z.string()).default([]),
     pdf: z.string().optional(),
     repository: z.string().url().optional(),
+    citekey: z.string().optional(),
+    citationType: z.enum(["unpublished", "misc", "techreport"]).optional(),
     public: z.boolean().default(false),
     featured: z.boolean().default(false),
     updated: z.coerce.date(),

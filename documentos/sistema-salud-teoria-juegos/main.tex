@@ -1,0 +1,137 @@
+\documentclass[12pt]{article}
+\usepackage{UF_FRED_paper_style}
+\usepackage{lipsum}
+\onehalfspacing
+\setlength{\droptitle}{-5em} %% Don't touch
+
+\title{\textit{Working Paper:} \\ %% <-- THIS PART IS IMPORTANT!
+Unraveling the Dynamics of the Colombian Health System: A Behavioral Analysis %% <-- THIS PART IS IMPORTANT!
+}
+
+\author{Augusto Rico\thanks{Thanks to Simon for guiding me in the \textit{Bourdieu's} analytical theory.}\\
+    \href{mailto:arico@unal.edu.co}{\texttt{arico@unal.edu.co}}
+% \and Second Author\\% Name author`'
+%     \href{mailto:secondauthor@ufl.edu}{\texttt{secondauthor@ufl.edu}} %% Email author 2
+    }
+
+\date{\today}
+
+\begin{document}
+
+{\setstretch{.8} %% Don't touch
+\maketitle
+\begin{abstract}
+    This paper delves into the intricate dynamics of the Colombian health system, exploring the interactions between Health Promoting Entities (EPS) and patients. Departing from the rational model, which predicts user rejection of EPS offers and resort to legal action, our behavioral model incorporates psychological factors influencing decision-making. Users, guided by Prospect Theory and loss aversion, may opt to accept EPS offers rather than file tutelas, driven by underconfidence bias and unawareness of social security contributions. On the EPS side, a potential commitment to distributive fairness diverges from profit-maximizing behavior, possibly influenced by a social norm evident in regional variations in tutela prevalence. Understanding these behavioral dynamics is crucial for informing policy and interventions to enhance equity in healthcare access across diverse regions of Colombia.
+% END CONTENT ABS------------------------------------------
+~\\
+\textit{\textbf{Keywords: }%
+medical-care; habitus; tutela; cognitive biases.} \\ %% <-- Keywords HERE!
+\textit{\textbf{JEL Classification: }%
+D91; C7; I18.} %% <-- JEL code HERE!
+\end{abstract}}
+
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BODY OF THE DOCUMENT
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\let\thefootnote\relax\footnotetext{Word Count: 3098}}
+% --------------------
+\section*{Introduction}
+% --------------------
+\begin{flushleft}
+
+    The landscape of health economics in Colombia unfolds as a complex and dynamic arena, where the interplay among Health Promoting Entities (\textit{EPS}), patients, and governmental institutions intricately shapes the provision and reception of medical services. This study delves into this distinctive context, seeking to unravel the incentives and behaviors that mold the functioning of the healthcare sector in Colombia. Building upon the foundational work of \citet{arrow1963uncertainty}, which underscored information problems in medical insurance, we focus on unique facets of these interactions, including information challenges, moral hazard, and decisions influenced by cognitive and social biases such as Bourdieu's habitus.\\~\\
+
+    In contrast to the rational model that posits decisions consistent with the maximization of expected benefits, we explore how the intricacies of the Colombian healthcare system challenge this approach. From the rational model suggesting that users would consistently reject offers from \textit{EPS} to the behavioral model highlighting the influence of psychological factors, we examine the diverse layers that shape user decisions and \textit{EPS} strategies. In this journey, we not only challenge the expectations of standard economic theory but also immerse ourselves in the cultural and social dynamics influencing this intricate system. This comprehensive analysis aims to provide a deeper understanding of the health economy in Colombia, laying the groundwork for more informed policy recommendations and practical strategies in the sector.\\~\\
+
+    This paper is divided into three sections, each examining aspects of dynamics within the Colombian healthcare system. The initial section, titled \textit{"The Colombian Health System,"} delves into the unique structure of the Colombian healthcare system, deviating from the American model to adopt a variation of the Bismarck model. It highlights the system's impact on reducing citizens' out-of-pocket expenses while recognizing challenges such as limited mobility between EPS and the option to file tutelas in cases of dissatisfaction with services.\\~\\
+
+    The second and third sections, titled \textit{"Rational Model"} and \textit{"Behavioral Model,"} respectively, constitute the analytical core of the paper. The rational model predicts systematic rejection of EPS offers by users, while the behavioral model incorporates psychological factors such as Prospect Theory and loss aversion, challenging the expectations of the rational model. The paper further explores EPS behavior, suggesting a potential commitment to distributive fairness influenced by social norms and regional variations in tutela prevalence.
+
+\end{flushleft}
+
+\section{Colombian Health System}
+
+\begin{flushleft}
+
+    In contrast to the American healthcare system, characterized by individually contracted private insurance, Colombia employs a variation of the \textbf{Bismarck model}. In this model, the state aims to provide coverage to all residents by paying a flat insurance fee per user to authorized companies known as \textit{EPS}. This fee remains identical for all citizens. Consequently, these authorized companies commit to serving these users and covering their medical treatments when necessary. This approach can be considered highly positive, given that the personal contribution to the common fund is determined by each individual's income. As outlined by \citet{perez2015mirada}, this system contributes to Colombia being among the countries with the lowest \textit{out-of-pocket} expenses for its citizens.\\~\\
+
+    However, unlike private insurance systems such as the American one, in the Colombian system, users cannot easily switch between authorized companies. In contrast, given that health is a fundamental right in the country, users who believe that the \textit{EPS} is not providing them with the services for which they are paying can file a \textit{\textbf{tutela}}. Through this mechanism, users can ask a judge to compel the \textit{EPS} to provide the service. One advantage of this approach is that users who need to file a \textit{tutela} don't necessarily require a lawyer or legal knowledge.\footnote{According to the \textit{Defensoria del Pueblo} in their annual report on the \textit{\textbf{tutela}}, more than 80\% of tutelas are filed without a lawyer}  This implies that all users who feel they are not receiving the services they deserve should consider filing a claim, Since many times services are denied, which can even pose a threat to life, as evidenced by \citet{sanchez2014barreras} in their study where they show that \textit{EPS} can delay, on average, 20 days beyond the recommended period for breast cancer treatments.\\~\\
+    
+\end{flushleft}
+
+\section{The Rational Model}
+
+\begin{flushleft}
+
+    In the rational model, we can assume a sequential ultimatum game, where the \textit{EPS} is the proposer, and the user accepts or rejects the proposal, with the difference that when the user rejects the proposal, an automatic payment is not obtained. Instead, we can assume that filing a \textit{\textbf{tutela}} is a state of nature with probability $\theta$, representing the historical percentage of health \textit{\textbf{tutelas}} won by users. In this game, the decisions unfold as follows: initially, the \textit{EPS} offers the user a service of $x\in(0,1)$, where the \textit{EPS}'s benefits are determined by the monetary difference between the offered service and the service needed given the medical conditions, $\pi=1-x$. Faced with this offer of $x$, the user has two options: accept what the \textit{EPS} offers and hence receive the payment of $x-1$\footnote{We must assume as a baseline that, given that this is a fundamental service that can even impact life, the user will spend their money to supplement what the \textit{EPS} does not provide.} from the \textit{EPS}, or reject the offer and place a tutela. In the latter case, the user may receive an additional payment of $t\in(x,1)$, causing a reduction in the \textit{EPS}'s benefit\footnote{For simplicity, we assume no legal representation costs}, which would now be $\pi=1-x-t$ if the court accepts the tutela. Payments would be equivalent to accepting the offer if the court rejects the \textit{\textbf{tutela}}, as the user receives no additional payment, and therefore, the \textit{EPS} pays nothing.\\~\\
+
+    In this game with individual and rational agents, it is evident that both agents will always choose to reject the offer initially, as the user can obtain a higher expected payment than if they accepted the \textit{EPS} offer for any level of $\theta$. Consequently, the best response the \textit{EPS} can give is always to offer the minimum possible service ($x=0$). Offering a higher payment would reduce its expected benefits, and therefore, there would be no incentive to provide a better service unless compelled by a court.\\~\\
+
+    It is possible to model this game as one with asimetric information where, given the user's medical ignorance, they are not sufficiently aware of the level of service they need. Nevertheless, the outcome will be the same since the user continues to have incentives to reject the offer and resort to legal stays, Even if some costs are assumed by the user when filing a \textit{tutela} (e.g., legal representation costs or waiting costs), we would end up with the scenario where the \textit{tutela} would be used if and only if $\theta t + \theta > \mathcal{C}$ is satisfied. This situation would occur in most cases, considering that \textit{EPS} best-response would be $x=0$ and then $t=1$ which means that $\theta > \mathcal{C}/2$, This implies that even assuming legal representation costs or other associated costs, filing \textit{tutelas} is a viable probability in the vast majority of cases. 
+    
+\end{flushleft}
+
+\section{The Behavioral Model}
+
+\begin{flushleft}
+
+    Despite the previously proposed rational model, this is far from what actually happens. Even if we assume all possible costs and other negotiation barriers, we would end up with the same result using rationality, where the user would always decide to reject the health insurance provider's offer and resort to legal action, and the EPS would always provide the minimum possible service. This deviates from reality, as evidenced, for instance, by the \textit{Defensoría del Pueblo}, which only files \textit{tutelas} in $0.71\%$ of all services provided. Similarly, the health insurance providers (\textit{EPS}) do not offer the minimum possible service, indicating that there may not be purely rational behavior on either side. Therefore, we will theorize about the possible reasons underlying this behavior.\\~\\
+
+    We can start by Analyzing user behavior through the lens of prospect theory, as explained by \citet{thaler1980toward} and \citet{tversky1991loss}, we assume that users may encounter a Prospect Theory problem. They might contemplate initiating a \textit{tutela}, but given the associated costs, and considering that losing would entail not only bearing the \textit{tutela} costs but also dealing with medical service payments, akin to the \textit{loss aversion} phenomenon, users would feel this loss intensely if they don't prevail in the \textit{tutela}. Even with a minimal probability of losing, users might perceive a potential worsening of the \textit{Default Option} scenario, indicating susceptibility to a \textit{Risk Aversion} problem as elucidated by \citet{rabin2000risk}. They might prefer the "safe" option over a riskier one, even if the latter has a considerably higher expected payout.\\~\\
+
+    Considering that, according to the \textit{Defensoria del Pueblo}, over $80\%$ of health-related \textit{tutelas} result in victory, making it one of the categories with the highest probability of success, irrespective of educational level. Yet, many individuals, as highlighted by the \textit{Defensoria del Pueblo}, perceive filing a \textit{tutela} as requiring profound legal knowledge. Despite being designed for use by individuals with low literacy, there exists a prevalent belief that filing a \textit{tutela} would likely result in a loss\footnote{Personal experience: I've encountered instances where individuals, facing health service denials, particularly for high-risk diseases like cancer, from \textit{EPS}, expressed reluctance to pursue a \textit{tutela} due to their lack of legal connections and belief in their inability to navigate the process, even when they possess university degrees.}, reflecting an \textit{underconfidence} bias as explained by \citet{bjorkman1993realism}. Consequently, they are inclined to favor accepting the \textit{EPS} offer and privately paying for the denied service.\\~\\
+    
+    This inclination arises from the fact that, in the event of losing the \textit{tutela}, they would incur the same costs. Given their loss aversion tendencies, if they believe they can afford the denied service, they are likely to prefer paying for it instead of incurring other costs, even though the rational decision would be to reject the \textit{EPS} offer and pursue a \textit{tutela}.\\~\\
+
+    Equally important to note within user behavior is the \textit{Commitment} that users who pay for social security undertake. Through this commitment, users engage in cooperative decision-making, contributing to the accessibility of health care for individuals without incomes. This is despite the rational decision in the short term, which may involve not paying, especially when in good health. It is crucial to remember that, in the case of unforeseen high-cost health problems (e.g., traffic accidents), users would still receive attention. In Colombia, health is a fundamental right for everyone.\\~\\
+
+    Interestingly, despite users being the ones paying for the possibility of being attended to by the \textit{EPS} in Colombia, there are no instances of \textit{sunk cost fallacy} problems, as theoretically asserted by \citet{arrow1963uncertainty} and empirically observed by \citet{braverman2012assessment} in America. In the United States, users tend to use health services more than necessary, even when not needed. In contrast, Colombia maintains equivalent rates of health service usage between those who pay and those subsidized.\\~\\
+
+    This can be explained by the Colombian model where workers contribute from their salaries. However, these contributors are often unaware of the extent of their contributions, leading users to not consider these costs when deciding whether to file a \textit{tutela}. If users were conscious of these contributions, they would have an additional incentive to file \textit{tutela}, at least for those who pay, believing they are reclaiming their money if successful. This could potentially lead to an increased inclination among users to pursue \textit{tutela}, given that today the proportion of users who effectively resort to tutela is not even higher than the proportion of users who are subsidized.\footnote{Statistics taken from the annual review on \textit{tutela} conducted by the Ministry of Health.}\\~\\
+
+    To date, our focus has been solely on the user and their irrational behavior. Nevertheless, as mentioned earlier, \textit{EPS} also manifest behavior distinct from that anticipated by the rational model. Evidently, even though they do not provide the required service in its entirety, in the vast majority of cases, they fall considerably short of the minimum payment suggested by rationality. This hints at their failure to maximize profits as expected of a rational agent. Hence, a comprehensive examination of \textit{EPS} behavior becomes imperative.\\~\\
+
+    This divergence in behavior could potentially be attributed to an implicit \textit{Commitment} wherein a form of \textit{distributive fairness} is established. Under this understanding, the user agrees to the \textit{EPS} not furnishing the required service, provided that the service offered maintains a certain level of \textit{Fairness}. In reciprocation, the user refrains from initiating \textit{tutelas}, thereby generating secure surpluses to sustain the \textit{EPS} over time. This phenomenon is discernible in historical data. When an \textit{EPS} encounters challenges such as bankruptcy or state intervention and consequently begins denying more services than historically denied, there is a noteworthy upswing in the number of \textit{tutelas} filed against it. This underscores users' aversion to inequity, indicating their capacity to tolerate service denials to some extent, contingent on them not being unduly excessive.\\~\\
+
+    However, the preceding cannot be adequately examined solely from the perspective of the isolated individual. On the contrary, it is imperative to investigate the potential existence of a \textit{social norm} that elucidates, for instance, the varying degrees of tolerance towards inequality. This is particularly crucial given the discernible pattern indicating that legal safeguards are not uniformly and independently distributed across the territory, contrary to expectations if it were purely an individual phenomenon. Instead, numerous \textit{tutelas} are concentrated in specific regions of the country, as evidenced in the Ministry of Health report for the year 2022\footnote{See Ministry of Health report, 2022}. This concentration suggests the presence of a social norm that influences the behavior of individuals within a societal context.\\~\\
+
+    As posited by \citet{lizardo2004cognitive} and \citet{piore2010bounded}, a comprehensive examination of cognitive processes must extend beyond the individual level to encompass the study of mental influences. This underscores the significance of understanding the formation of our \textit{mental models}, which are inherently socially structured. After all, humans possess the linguistic capacity to institutionalize norms, both formally and informally, emphasizing the inherently social nature of this phenomenon.\\~\\
+
+    Therefore, we can employ the definition of \textit{habitus} as articulated by \citet{bourdieu2016distincion} within the realm of behavioral economics, as presented by \citet{hayes2020behavioral}. This conceptualization elucidates that variations in the prevalence of \textit{tutelas} are intricately linked to the extent of cultural capital inherent in the social milieu.\\~\\
+    
+    This phenomenon is conspicuous in the central regions of Colombia, distinguished by a populace of individuals with elevated cultural capital, resulting in a heightened incidence of \textit{tutelas}. In contrast, specific peripheral areas, predominantly inhabited by non-white populations such as \textit{La Guajira, Vichada, Guaviare, and Choco}, manifest over tenfold fewer instances of \textit{tutelas} compared to their central counterparts. This underscores the propensity for individuals in these regions to perceive certain injustices within the healthcare system as \textit{legitimate and natural}. In other regions, analogous circumstances would be deemed sufficiently \textit{unfairness}, warranting the invocation of a \textit{tutela}.
+
+\end{flushleft}
+
+\section*{conclusion}
+
+\begin{flushleft}
+
+    In conclusion, our exploration of the Colombian health system reveals a nuanced interplay among Health Promoting Entities (\textit{EPS}) and patients. Unlike the rational model, where users would always reject \textit{EPS} offers and resort to legal action, the behavioral model highlights the influence of psychological factors on decision-making.\\~\\
+
+    Users, guided by Prospect Theory and loss aversion, may hesitate to file \textit{tutelas} despite high success rates, fearing potential losses. Additionally, an underconfidence bias and lack of awareness of social security contributions contribute to users' inclination to accept \textit{EPS} offers rather than pursuing legal action.\\~\\
+
+    On the \textit{EPS} side, a potential implicit commitment to distributive fairness deviates from rational profit-maximizing behavior. The divergence in behavior may be explained by the existence of a social norm, as demonstrated by variations in \textit{tutela} prevalence across regions, reflecting the impact of cultural capital and \textit{habitus} on individuals' decisions.\\~\\
+
+    Understanding these behavioral dynamics is crucial for policymakers and practitioners in the Colombian health sector. Efforts should focus not only on legal and procedural aspects but also on addressing psychological barriers that hinder users from asserting their rights. Moreover, recognizing the role of social norms and cultural capital can inform targeted interventions to promote equity in healthcare access across diverse regions.\\~\\
+
+\end{flushleft}
+
+\newpage
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% REFERENCES SECTION
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\medskip
+
+\nocite{*}
+\printbibliography
+\newpage
+
+\end{document}

@@ -1,31 +1,45 @@
 ---
-title: "Unraveling the Dynamics of the Colombian Health System"
-subtitle: "A behavioral and game-theoretic approach"
+title: "Unraveling the Dynamics of the Colombian Health System: A Behavioral Analysis"
 type: "Working paper"
 status: "Working paper"
 year: 2023
 authors:
   - "Augusto Rico"
 role: "Autor"
-summary: "Análisis del sistema de salud colombiano desde economía conductual y teoría de juegos, con foco en incentivos, interacción estratégica y comportamiento."
+summary: "Working paper sobre interacciones entre EPS y pacientes, contrastando un modelo racional con mecanismos de economía conductual como prospect theory, loss aversion, underconfidence y normas sociales."
 topics:
   - "Behavioral Economics"
   - "Game Theory"
   - "Health Economics"
+  - "Prospect Theory"
   - "Public Policy"
+pdf: "/pdf/sistema-salud-teoria-juegos.pdf"
+repository: "https://github.com/LeKilleRGallet/university/tree/master/microeconomics/Behavioral_Economics/paper"
+citekey: "rico2023colombianhealth"
+citationType: "unpublished"
 public: true
 featured: true
 updated: "2026-09-18"
 ---
 
-## Enfoque
+## Pregunta
 
-El trabajo usa herramientas de economía conductual y teoría de juegos para
-organizar problemas de incentivos e interacción estratégica dentro del sistema
-de salud colombiano.
+El documento estudia por qué el comportamiento observado de pacientes y EPS
+puede diferir de las predicciones de un modelo racional.
+
+## Modelo y mecanismos
+
+El texto plantea un juego secuencial entre EPS y usuario y luego introduce
+mecanismos de economía conductual: *Prospect Theory*, aversión a las pérdidas,
+*underconfidence*, compromiso, normas sociales y *habitus*.
+
+## Documento
+
+El PDF se compila desde las fuentes LaTeX que ya estaban publicadas en el
+repositorio university. La versión del sitio conserva el carácter de
+*working paper* del documento original.
 
 ## Estado
 
-El documento se mantiene como *working paper*. La ficha describe una línea de
-investigación en desarrollo y no debe interpretarse como una publicación
-revisada por pares.
+No es una publicación revisada por pares. La referencia disponible en esta
+página sirve para identificar y citar esta versión de trabajo.
