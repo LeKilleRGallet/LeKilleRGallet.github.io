@@ -57,10 +57,6 @@ const graphJsonLd = {
         "@type": "CollegeOrUniversity",
         name: education.institution,
       })),
-      worksFor: {
-        "@type": "Organization",
-        name: "DIAN — Dirección de Impuestos y Aduanas Nacionales",
-      },
       knowsAbout: [...publicProfile.skills, ...publicProfile.researchAreas],
       knowsLanguage: publicProfile.languages.map((x) => x.language),
       sameAs: [publicProfile.links.github, publicProfile.links.linkedin],
