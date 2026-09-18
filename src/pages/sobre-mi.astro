@@ -15,8 +15,8 @@ const profileJsonLd = {
   mainEntity: {
     "@type": "Person",
     "@id": personId,
-    name: publicProfile.name,
-    alternateName: "LeKilleRGallet",
+    name: publicProfile.legalName,
+    alternateName: publicProfile.aliases,
     description: publicProfile.description,
     url: publicProfile.links.website,
     jobTitle: "Economist and Data Analyst",
@@ -37,7 +37,7 @@ const profileJsonLd = {
 
 <BaseLayout
   title="Sobre mí"
-  description="Perfil público canónico de Augusto Rico: economista de la Universidad Nacional de Colombia, analista de datos e investigador en Bogotá."
+  description="Perfil público canónico de Augusto David Rico Dautt (Augusto Rico): economista de la Universidad Nacional de Colombia, analista de datos e investigador en Bogotá."
   alternateEs="/sobre-mi/"
   alternateEn="/en/about/"
 >
@@ -49,6 +49,7 @@ const profileJsonLd = {
     <header class="page-header">
       <p class="eyebrow">Perfil público canónico</p>
       <h1>{publicProfile.name}</h1>
+      <p class="metadata">{publicProfile.legalName} · también identificado en línea como LeKilleRGallet</p>
       <p>{publicProfile.description}</p>
     </header>
 
