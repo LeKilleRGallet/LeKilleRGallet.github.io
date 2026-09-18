@@ -6,14 +6,21 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  lang?: "es" | "en";
+  alternateEs?: string;
+  alternateEn?: string;
 }
 
 const {
   title = publicProfile.name,
   description = publicProfile.description,
   image = "/favicon.svg",
+  lang = "es",
+  alternateEs,
+  alternateEn,
 } = Astro.props;
 
+const isEnglish = lang === "en";
 const fullTitle = title === publicProfile.name ? title : `${title} | ${publicProfile.name}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL(image, Astro.site);
@@ -28,7 +35,7 @@ const graphJsonLd = {
       "@id": websiteId,
       url: publicProfile.links.website,
       name: "Augusto Rico — Economics, Data & Research",
-      description: publicProfile.description,
+      description: publicProfile.descriptionEn,
       inLanguage: ["es", "en"],
       publisher: { "@id": personId },
     },
@@ -39,7 +46,7 @@ const graphJsonLd = {
       url: publicProfile.links.website,
       mainEntityOfPage: publicProfile.links.about,
       jobTitle: "Economist and Data Analyst",
-      description: publicProfile.description,
+      description: publicProfile.descriptionEn,
       email: `mailto:${publicProfile.email}`,
       homeLocation: {
         "@type": "Place",
@@ -62,7 +69,7 @@ const graphJsonLd = {
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -74,6 +81,9 @@ const graphJsonLd = {
 
     <link rel="canonical" href={canonical} />
     <link rel="author" href="/sobre-mi/" />
+    {alternateEs && <link rel="alternate" hreflang="es" href={new URL(alternateEs, Astro.site)} />}
+    {alternateEn && <link rel="alternate" hreflang="en" href={new URL(alternateEn, Astro.site)} />}
+    {(alternateEs || alternateEn) && <link rel="alternate" hreflang="x-default" href={new URL("/", Astro.site)} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link
       rel="alternate"
@@ -89,7 +99,7 @@ const graphJsonLd = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={socialImage} />
-    <meta property="og:locale" content="es_CO" />
+    <meta property="og:locale" content={isEnglish ? "en_US" : "es_CO"} />
 
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={fullTitle} />
@@ -102,22 +112,36 @@ const graphJsonLd = {
   </head>
 
   <body>
-    <a class="skip-link" href="#contenido">Ir al contenido</a>
+    <a class="skip-link" href="#contenido">{isEnglish ? "Skip to content" : "Ir al contenido"}</a>
 
     <header class="site-header">
       <div class="container navigation">
-        <a class="brand" href="/" aria-label="Augusto Rico, inicio">
+        <a class="brand" href={isEnglish ? "/en/" : "/"} aria-label={isEnglish ? "Augusto Rico, home" : "Augusto Rico, inicio"}>
           <span class="brand-mark">AR</span>
           <span>Augusto Rico</span>
         </a>
 
-        <nav aria-label="Navegación principal">
-          <a href="/investigacion/">Investigación</a>
-          <a href="/archivo/">Archivo</a>
-          <a href="/agenda/">Agenda</a>
-          <a href="/colaborar/">Colaborar</a>
-          <a href="/cv/">CV</a>
-          <a href="/sobre-mi/">Sobre mí</a>
+        <nav aria-label={isEnglish ? "Main navigation" : "Navegación principal"}>
+          {isEnglish ? (
+            <>
+              <a href="/en/">Profile</a>
+              <a href="/research/">Research</a>
+              <a href="/data/">Data</a>
+              <a href="/finance/">Finance</a>
+              <a href="/pdf/cv.pdf">CV</a>
+              <a href="/">Español</a>
+            </>
+          ) : (
+            <>
+              <a href="/investigacion/">Investigación</a>
+              <a href="/archivo/">Archivo</a>
+              <a href="/agenda/">Agenda</a>
+              <a href="/colaborar/">Colaborar</a>
+              <a href="/cv/">CV</a>
+              <a href="/sobre-mi/">Sobre mí</a>
+              <a href="/en/">English</a>
+            </>
+          )}
         </nav>
       </div>
     </header>
@@ -130,7 +154,7 @@ const graphJsonLd = {
       <div class="container footer-grid">
         <div>
           <strong>{publicProfile.name}</strong>
-          <p>Economía, datos e investigación.</p>
+          <p>{isEnglish ? "Economics, data and research." : "Economía, datos e investigación."}</p>
         </div>
 
         <div class="footer-links">
