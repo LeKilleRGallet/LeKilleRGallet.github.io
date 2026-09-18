@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProjectCard from "../../components/ProjectCard.astro";
+import TrackedLanding from "../../components/TrackedLanding.astro";
 import { topicHubs } from "../../data/topics";
 import { archiveDocuments } from "../../data/archive";
 
@@ -105,4 +106,6 @@ const schema = {
       </div>
     </section>
   </article>
+
+  <TrackedLanding label="Esta página puede registrar una visita anónima cuando se abre desde una candidatura rastreada." />
 </BaseLayout>
