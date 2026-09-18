@@ -9,8 +9,8 @@ const proyectos = (
 ---
 
 <BaseLayout
-  title="Investigación"
-  description="Working papers, manuscritos y proyectos de investigación de Augusto Rico."
+  title="Investigación en economía y datos"
+  description="Working papers, manuscritos y proyectos de Augusto Rico en economía, métodos cuantitativos, finanzas, comportamiento, datos y política pública."
   alternateEs="/investigacion/"
   alternateEn="/en/research/"
 >
@@ -27,6 +27,28 @@ const proyectos = (
   <div class="project-grid">
     {proyectos.map((proyecto) => <ProjectCard proyecto={proyecto} />)}
   </div>
+
+  <section class="section-block">
+    <div class="two-column">
+      <div>
+        <p class="eyebrow">Método</p>
+        <h2>Estado explícito y evidencia reproducible.</h2>
+        <p>
+          Cada ficha separa autoría, rol, estado del trabajo, PDF y fuente cuando existen.
+          Esto permite distinguir working papers, manuscritos y proyectos sin atribuirles
+          un estatus editorial que no tienen.
+        </p>
+      </div>
+      <div>
+        <p class="eyebrow">Conexiones</p>
+        <p>
+          Los proyectos se conectan con hubs temáticos de econometría, economía
+          conductual, finanzas cuantitativas, datos y cumplimiento tributario.
+        </p>
+        <a class="button" href="/temas/">Explorar por temas</a>
+      </div>
+    </div>
+  </section>
 
   <section class="section-block compact">
     <div class="callout">
