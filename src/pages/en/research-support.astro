@@ -1,0 +1,49 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import TrackedLanding from "../../components/TrackedLanding.astro";
+
+const projects = (
+  await getCollection("proyectos", ({ data }) => data.public)
+).sort((a, b) => b.data.year - a.data.year);
+---
+
+<BaseLayout
+  title="Research Support"
+  description="Research support portfolio of Augusto Rico: literature review, quantitative analysis, reproducible data work, econometrics and applied economics."
+  lang="en"
+  alternateEs="/research/"
+  alternateEn="/en/research-support/"
+>
+  <header class="page-header">
+    <p class="eyebrow">Research support · Economics · Quantitative methods</p>
+    <h1>Research and methods.</h1>
+    <p>
+      I support research through literature review, data construction, quantitative
+      analysis, econometrics, visualization and reproducible workflows.
+    </p>
+  </header>
+
+  <div class="project-grid">
+    {projects.map((project) => <ProjectCard proyecto={project} lang="en" />)}
+  </div>
+
+  <section class="section-block">
+    <div class="two-column">
+      <div>
+        <p class="eyebrow">Methods</p>
+        <h2>Quantitative research support.</h2>
+        <p>Data preparation, statistical analysis, econometrics, model evaluation and research documentation.</p>
+      </div>
+      <div>
+        <p class="eyebrow">Evidence</p>
+        <h2>PDFs, source files and citations.</h2>
+        <p>Project pages expose PDFs, source repositories and BibTeX when a public version exists.</p>
+        <a class="button" href="/en/archive/">View archive</a>
+      </div>
+    </div>
+  </section>
+
+  <TrackedLanding label="This page may register an anonymous visit when opened from a tracked application." />
+</BaseLayout>
