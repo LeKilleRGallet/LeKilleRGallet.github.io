@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const lines = [
+  { title: "AI and constitutional health claims", stage: "Research design", text: "Evaluate whether broader access to AI tools changes access to, composition of or behavior around constitutional health claims and insurer responses in Colombia." },
+  { title: "SIMPLE tax regime, tax-base substitution and formalization", stage: "Empirical agenda", text: "Separate three questions: substitution across tax regimes, effects on formalization and multidimensional measurement of tax informality." },
+  { title: "BRT, accessibility and urban structure", stage: "Empirical agenda", text: "Study BRT expansion in Bogotá using causal evaluation, accessibility measures and network methods." },
+  { title: "Economics as a science", stage: "Theoretical and applied agenda", text: "Compare economic practice with philosophy-of-science frameworks including Popper, Kuhn and Feyerabend." },
+  { title: "Networks, withholding taxes and formality", stage: "Hypothesis", text: "Explore whether withholding and invoicing relationships create network mechanisms that affect compliance and formalization." },
+  { title: "Sports betting and externalities", stage: "Research design", text: "Study the relationship between commercial exposure to sports betting and social or health outcomes using administrative data and quasi-experimental designs." }
+];
+---
+
+<BaseLayout
+  title="Research Agenda"
+  description="Open research questions and future research lines of Augusto Rico."
+  lang="en"
+  alternateEs="/agenda/"
+  alternateEn="/en/research-agenda/"
+>
+  <header class="page-header">
+    <p class="eyebrow">Research agenda</p>
+    <h1>Open questions.</h1>
+    <p>These are research directions, not completed papers or established findings.</p>
+  </header>
+
+  <div class="agenda-list">
+    {lines.map((line) => (
+      <article class="agenda-item">
+        <p class="eyebrow">{line.stage}</p>
+        <h2>{line.title}</h2>
+        <p>{line.text}</p>
+      </article>
+    ))}
+  </div>
+</BaseLayout>
