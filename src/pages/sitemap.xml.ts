@@ -9,39 +9,59 @@ const esc = (value: string) =>
     .replaceAll('"', "&quot;");
 
 export const GET = async ({ site }: any) => {
-  const proyectos = await getCollection("proyectos", ({ data }) => data.public);
+  const projects = await getCollection("proyectos", ({ data }) => data.public);
 
-  const staticPages = [
-    "/",
-    "/en/",
-    "/investigacion/",
-    "/research/",
-    "/data/",
-    "/finance/",
-    "/archivo/",
-    "/agenda/",
-    "/colaborar/",
-    "/cv/",
-    "/sobre-mi/",
-    "/contacto/",
-  ].map((path) => ({
-    path,
-    lastmod: publicProfile.lastUpdated,
-  }));
+  const pairs = [
+    ["/", "/en/"],
+    ["/sobre-mi/", "/en/about/"],
+    ["/investigacion/", "/en/research/"],
+    ["/research/", "/en/research-support/"],
+    ["/data/", "/en/data/"],
+    ["/finance/", "/en/finance/"],
+    ["/archivo/", "/en/archive/"],
+    ["/agenda/", "/en/research-agenda/"],
+    ["/colaborar/", "/en/collaborate/"],
+    ["/cv/", "/en/cv/"],
+    ["/contacto/", "/en/contact/"],
+  ];
 
-  const projectPages = proyectos.map((p) => ({
-    path: `/proyectos/${p.id}/`,
-    lastmod: p.data.updated.toISOString().slice(0, 10),
-  }));
+  const pairedPages = pairs.flatMap(([esPath, enPath]) => [
+    { path: esPath, esPath, enPath, lastmod: publicProfile.lastUpdated },
+    { path: enPath, esPath, enPath, lastmod: publicProfile.lastUpdated },
+  ]);
 
-  const pdfPages = proyectos
+  const projectPages = projects.flatMap((p) => {
+    const esPath = `/proyectos/${p.id}/`;
+    const enPath = `/en/projects/${p.id}/`;
+    const lastmod = p.data.updated.toISOString().slice(0, 10);
+    return [
+      { path: esPath, esPath, enPath, lastmod },
+      { path: enPath, esPath, enPath, lastmod },
+    ];
+  });
+
+  const pdfPages = projects
     .filter((p) => Boolean(p.data.pdf))
     .map((p) => ({
       path: p.data.pdf!,
       lastmod: p.data.updated.toISOString().slice(0, 10),
     }));
 
-  const urls = [...staticPages, ...projectPages, ...pdfPages]
+  const pairedXml = [...pairedPages, ...projectPages]
+    .map(({ path, esPath, enPath, lastmod }) => {
+      const loc = new URL(path, site).toString();
+      const esUrl = new URL(esPath, site).toString();
+      const enUrl = new URL(enPath, site).toString();
+      return `  <url>
+    <loc>${esc(loc)}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="${esc(esUrl)}" />
+    <xhtml:link rel="alternate" hreflang="en" href="${esc(enUrl)}" />
+  </url>`;
+    })
+    .join("\n");
+
+  const pdfXml = pdfPages
     .map(({ path, lastmod }) => {
       const loc = new URL(path, site).toString();
       return `  <url>
@@ -52,8 +72,11 @@ export const GET = async ({ site }: any) => {
     .join("\n");
 
   const body = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls}
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${pairedXml}
+${pdfXml}
 </urlset>
 `;
 
