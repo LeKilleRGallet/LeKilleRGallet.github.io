@@ -1,58 +1,91 @@
-﻿---
+---
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
 
 const proyectos = (
-  await getCollection(
-    "proyectos",
-    ({ data }) => data.public && data.featured
-  )
+  await getCollection("proyectos", ({ data }) => data.public && data.featured)
 ).sort((a, b) => b.data.year - a.data.year);
 ---
 
 <BaseLayout
   title="Augusto Rico"
-  description="Investigacin en economa, estadstica, complejidad y poltica pblica."
+  description="Economista y analista de datos en Bogotá. Python, SQL, PySpark, Databricks, Power BI e investigación en economía, comportamiento y métodos cuantitativos."
 >
   <section class="hero">
-    <p class="metadata">Portafolio acadmico</p>
-    <h1>Economa, estadstica, complejidad y poltica pblica.</h1>
-    <p>
-      Este sitio rene proyectos, planes de trabajo, documentos y materiales
-      de investigacin.
+    <p class="eyebrow">Economist · Data Analyst · Research</p>
+    <h1>Economía, datos e investigación aplicada.</h1>
+    <p class="hero-copy">
+      Soy economista de la Universidad Nacional de Colombia y trabajo como
+      Analista I en la DIAN. Desarrollo análisis cuantitativo, flujos
+      reproducibles y proyectos de investigación con Python, SQL, PySpark,
+      Databricks, Power BI y métodos estadísticos.
     </p>
 
     <div class="actions">
-      <a class="button primary" href="/investigacion/">Ver investigacin</a>
-      <a class="button" href="/cv/">Consultar CV</a>
+      <a class="button primary" href="/investigacion/">Ver investigación</a>
+      <a class="button" href="/colaborar/">Colaborar</a>
+      <a class="text-link" href="/pdf/cv.pdf" target="_blank" rel="noreferrer">CV en PDF</a>
+    </div>
+
+    <ul class="hero-facts" aria-label="Datos principales">
+      <li>Bogotá, Colombia</li>
+      <li>Español · English · Deutsch</li>
+      <li>Disponible para proyectos remotos y por entregables</li>
+    </ul>
+  </section>
+
+  <section class="section-block">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Trabajo actual</p>
+        <h2>Analítica y evidencia para decisiones</h2>
+      </div>
+    </div>
+
+    <div class="capability-grid">
+      <article class="capability">
+        <span class="number">01</span>
+        <h3>Datos</h3>
+        <p>Integración, limpieza, validación y automatización de bases administrativas con Python, SQL, PySpark y Databricks.</p>
+      </article>
+      <article class="capability">
+        <span class="number">02</span>
+        <h3>Modelación</h3>
+        <p>Clasificación, segmentación, series de tiempo, evaluación de modelos y análisis estadístico.</p>
+      </article>
+      <article class="capability">
+        <span class="number">03</span>
+        <h3>Investigación</h3>
+        <p>Economía conductual, teoría de juegos, finanzas cuantitativas, causalidad, redes y política pública.</p>
+      </article>
     </div>
   </section>
 
-  <section>
+  <section class="section-block">
     <div class="section-heading">
-      <h2>Proyectos seleccionados</h2>
-      <a href="/investigacion/">Ver todos</a>
+      <div>
+        <p class="eyebrow">Research</p>
+        <h2>Proyectos seleccionados</h2>
+      </div>
+      <a class="text-link" href="/investigacion/">Ver todos</a>
     </div>
 
     <div class="project-grid">
-      {
-        proyectos.map((proyecto) => (
-          <article class="card">
-            <p class="metadata">
-              {proyecto.data.type}  {proyecto.data.year}
-            </p>
-
-            <h3>
-              <a href={`/proyectos/${proyecto.id}/`}>
-                {proyecto.data.title}
-              </a>
-            </h3>
-
-            <p>{proyecto.data.summary}</p>
-            <p class="muted">{proyecto.data.status}</p>
-          </article>
-        ))
-      }
+      {proyectos.map((proyecto) => <ProjectCard proyecto={proyecto} />)}
     </div>
+  </section>
+
+  <section class="callout">
+    <div>
+      <p class="eyebrow">Colaboración</p>
+      <h2>Data, research support y análisis económico.</h2>
+      <p>
+        Puedo apoyar proyectos por horas o por entregables en análisis de datos,
+        BI, investigación cuantitativa, revisión de evidencia y evaluación de
+        modelos.
+      </p>
+    </div>
+    <a class="button primary" href="/colaborar/">Áreas de colaboración</a>
   </section>
 </BaseLayout>
