@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+
+const projects = (
+  await getCollection("proyectos", ({ data }) => data.public)
+).sort((a, b) => b.data.year - a.data.year);
+---
+
+<BaseLayout
+  title="Research"
+  description="Working papers, research manuscripts and projects by Augusto Rico in economics, quantitative methods, behavioral economics, finance and public policy."
+  lang="en"
+  alternateEs="/investigacion/"
+  alternateEn="/en/research/"
+>
+  <header class="page-header">
+    <p class="eyebrow">Research portfolio</p>
+    <h1>Research</h1>
+    <p>
+      Working papers, manuscripts and research projects. Each page states its
+      actual status; being listed here does not imply peer review or journal publication.
+    </p>
+  </header>
+
+  <div class="project-grid">
+    {projects.map((project) => <ProjectCard proyecto={project} lang="en" />)}
+  </div>
+
+  <section class="section-block compact">
+    <div class="callout">
+      <div>
+        <p class="eyebrow">Research agenda</p>
+        <h2>Open questions and future work.</h2>
+        <p>The research agenda separates early-stage questions from manuscripts already under development.</p>
+      </div>
+      <a class="button" href="/en/research-agenda/">View agenda</a>
+    </div>
+  </section>
+</BaseLayout>
