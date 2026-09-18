@@ -1,5 +1,5 @@
 # Augusto Rico — public portfolio and research site
-# Public content is intentionally crawlable.
+# Search/discovery is allowed. Training crawler access is intentionally separated.
 
 User-agent: OAI-SearchBot
 Allow: /
@@ -8,7 +8,7 @@ User-agent: ChatGPT-User
 Allow: /
 
 User-agent: GPTBot
-Allow: /
+Disallow: /
 
 User-agent: Googlebot
 Allow: /
