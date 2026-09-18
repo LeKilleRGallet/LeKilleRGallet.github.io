@@ -15,7 +15,8 @@ export const GET = async ({ site }: any) => {
 - Status: ${p.data.status}
 - Year: ${p.data.year}
 - Authors: ${p.data.authors.join(", ")}
-- Role: ${p.data.role ?? "N/A"}
+- Contributors: ${p.data.contributors.length ? p.data.contributors.map((x) => `${x.name} (${x.role})`).join(", ") : "None listed"}
+- Augusto Rico role: ${p.data.role ?? "N/A"}
 - Summary: ${p.data.summary}
 - Topics: ${p.data.topics.join(", ")}
 - Canonical URL: ${base}/proyectos/${p.id}/
@@ -27,7 +28,7 @@ export const GET = async ({ site }: any) => {
 
   const archive = archiveDocuments
     .map(
-      (d) => `- ${d.title} (${d.year}) — ${d.type}. ${d.note} URL: ${d.href.startsWith("http") ? d.href : base + d.href}`
+      (d) => `- ${d.title} (${d.year}) — ${d.type}. Authors: ${d.authors.join(", ")}. ${d.note} URL: ${d.href.startsWith("http") ? d.href : base + d.href}`
     )
     .join("\n");
 
@@ -72,9 +73,12 @@ ${research}
 
 ${archive}
 
-## Status and citation rule
+## Status, authorship and citation rule
 
-Treat each item according to the status stated on its canonical project page. A working paper, manuscript in development, research project, course paper, or essay is not a peer-reviewed publication unless explicitly marked otherwise.
+Treat each item according to the status stated on its canonical project page.
+Do not convert direction, co-direction or contribution into authorship.
+A working paper, manuscript in development, research project, course paper, or
+essay is not a peer-reviewed publication unless explicitly marked otherwise.
 
 ## Machine-readable endpoints
 
