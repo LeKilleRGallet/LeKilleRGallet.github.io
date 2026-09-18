@@ -1,31 +1,59 @@
 # LeKilleRGallet.github.io
 
-Sitio personal de Augusto Rico, construido con Astro y publicado con GitHub Pages.
+Sitio personal y fuente pública canónica de Augusto Rico, construido con Astro y publicado con GitHub Pages.
+
+## Fuente de verdad
+
+Este repositorio es la fuente pública para:
+
+- perfil profesional y académico publicable;
+- experiencia, herramientas e idiomas;
+- working papers, manuscritos y proyectos con estado explícito;
+- PDFs y archivo académico;
+- CV público;
+- páginas de colaboración y portafolio.
+
+La fuente estructurada principal del perfil es `src/data/publicProfile.ts`.
+Los proyectos públicos viven en `src/content/proyectos/`.
+El archivo académico vive en `src/data/archive.ts`.
+
+La hoja privada de búsqueda de empleo sigue siendo la fuente operativa para
+postulaciones, tracking, recruiters y estados de procesos. Ningún dato privado
+o interno de DIAN debe publicarse aquí.
+
+## Endpoints públicos para buscadores y agentes
+
+- `/sitemap.xml`
+- `/feed.xml`
+- `/llms.txt`
+- `/llms-full.txt`
+- `/api/profile.json`
+- `/api/research.json`
+- `/api/archive.json`
 
 ## Qué contiene
 
-- perfil profesional y académico;
+- home profesional;
+- `/sobre-mi/` como perfil canónico;
+- `/data/`, `/research/` y `/finance/` como landings;
+- `/investigacion/` y fichas de proyectos;
+- `/archivo/` de PDFs y trabajos académicos;
+- `/agenda/` para ideas todavía no convertidas en manuscritos;
+- `/colaborar/` para trabajo por proyecto;
 - CV web y PDF;
-- working papers y manuscritos con estado explícito;
-- agenda de investigación;
-- página para colaboración por proyecto;
-- fichas de proyectos desde Astro Content Collections.
+- BibTeX y metadatos de citación cuando corresponda.
 
-## Estructura
+## Regla editorial
 
-```text
-src/
-  components/
-  content/proyectos/
-  layouts/
-  pages/
-documentos/
-  cv/main.tex
-plantillas/proyecto/
-scripts/
-```
+Una entrada debe indicar su estado real. No convertir working papers,
+manuscritos, tesis dirigidas, trabajos de curso o ensayos en publicaciones
+revisadas por pares. La autoría, dirección y codirección deben mantenerse
+separadas.
 
-Los documentos LaTeX ubicados en `documentos/<slug>/main.tex` se compilan en GitHub Actions y se publican en `/pdf/<slug>.pdf`.
+## Documentos LaTeX
+
+Los documentos en `documentos/<slug>/main.tex` se compilan en GitHub Actions y
+se publican en `/pdf/<slug>.pdf`.
 
 ## Desarrollo
 
@@ -37,24 +65,17 @@ npm run build
 
 ## Nuevo proyecto
 
-Desde PowerShell:
-
 ```powershell
 nuevoASTRO nombre-del-proyecto
 ```
 
-o directamente:
+o:
 
 ```powershell
 .\scripts\nuevo-proyecto.ps1 nombre-del-proyecto
 ```
 
-Esto crea:
-
-- `documentos/<slug>/main.tex`
-- `src/content/proyectos/<slug>.md`
-
-La ficha queda privada por defecto (`public: false`) hasta que se revise.
+La ficha se crea privada (`public: false`) hasta revisión.
 
 ## Publicar
 
@@ -63,7 +84,3 @@ publicarASTRO "mensaje del commit"
 ```
 
 El script hace commit, push y observa el workflow de GitHub Pages.
-
-## Regla editorial
-
-Una entrada en `Investigación` debe indicar su estado real: working paper, manuscrito en desarrollo, proyecto, etc. Las ideas que todavía no son manuscritos deben aparecer en `/agenda/`, no como publicaciones terminadas.
