@@ -26,7 +26,7 @@ export const GET = ({ site }: any) => {
 
 ## Public profile
 
-- Name: ${publicProfile.name}
+- Professional name: ${publicProfile.name}\n- Full name: ${publicProfile.legalName}\n- Online alias: LeKilleRGallet
 - Role: ${publicProfile.headline}
 - Location: ${publicProfile.location.city}, ${publicProfile.location.country}
 - Education: Economics, Universidad Nacional de Colombia, 2024
