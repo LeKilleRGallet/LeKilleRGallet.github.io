@@ -1,6 +1,8 @@
 ---
 title: "Medición multidimensional de informalidad tributaria empresarial"
 titleEn: "Multidimensional Measurement of Business Tax Informality"
+seoTitle: "Informalidad tributaria multidimensional"
+seoTitleEn: "Multidimensional Tax Informality"
 subtitle: "Del cumplimiento binario a la intensidad fiscal"
 subtitleEn: "From binary compliance to fiscal intensity"
 type: "Proyecto de investigación"
@@ -21,6 +23,8 @@ role: "Codirector"
 roleEn: "Co-director"
 summary: "Proyecto de tesis sobre medición multidimensional de informalidad tributaria empresarial en Colombia mediante dimensiones de registro, declaración, pago, facturación electrónica y consistencia entre fuentes."
 summaryEn: "Thesis project on multidimensional measurement of business tax informality in Colombia using registration, filing, payment, electronic invoicing and cross-source consistency dimensions."
+seoDescription: "Proyecto sobre medición multidimensional de informalidad tributaria empresarial en Colombia con registro, declaración, pago y facturación electrónica."
+seoDescriptionEn: "Research project on multidimensional measurement of business tax informality in Colombia using registration, filing, payment and electronic invoicing."
 topics:
   - "Informalidad"
   - "Tax Compliance"
