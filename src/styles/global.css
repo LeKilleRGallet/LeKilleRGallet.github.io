@@ -432,3 +432,80 @@ main.container {
 
   .contact-list div { grid-template-columns: 1fr; gap: .15rem; }
 }
+
+
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.audience-card {
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.audience-card h3 { margin: .35rem 0 .65rem; }
+.audience-card p { color: var(--muted); }
+
+.tracking-note {
+  margin-top: 3rem;
+  color: var(--muted);
+  font-size: .76rem;
+}
+
+.citation-box {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-soft);
+}
+
+.citation-box h2 { margin-top: 0; }
+.citation-box pre {
+  max-width: 100%;
+  padding: 1rem;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: .82rem;
+}
+
+.archive-list {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--border);
+}
+
+.archive-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.archive-item h2 {
+  margin: .2rem 0 .55rem;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+}
+
+.archive-item p:last-child { margin-bottom: 0; }
+
+@media (max-width: 850px) {
+  .audience-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 680px) {
+  .archive-item {
+    grid-template-columns: 1fr;
+    gap: .75rem;
+  }
+}
