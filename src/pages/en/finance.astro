@@ -1,0 +1,51 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import TrackedLanding from "../../components/TrackedLanding.astro";
+---
+
+<BaseLayout
+  title="Finance & Quant"
+  description="Augusto Rico's quantitative finance profile: time series, forecasting, volatility, GARCH, portfolio optimization and econometrics."
+  lang="en"
+  alternateEs="/finance/"
+  alternateEn="/en/finance/"
+>
+  <header class="page-header">
+    <p class="eyebrow">Finance · Quant · Econometrics</p>
+    <h1>Finance and quantitative methods.</h1>
+    <p>
+      Economics training combined with research in financial time series,
+      forecasting, volatility modelling and portfolio construction.
+    </p>
+  </header>
+
+  <div class="capability-grid">
+    <article class="capability">
+      <span class="number">01</span>
+      <h3>Forecasting</h3>
+      <p>Time series, LSTM, GAM, ARIMA and forecast evaluation.</p>
+    </article>
+    <article class="capability">
+      <span class="number">02</span>
+      <h3>Risk & volatility</h3>
+      <p>Volatility, GARCH, market indicators and quantitative analysis.</p>
+    </article>
+    <article class="capability">
+      <span class="number">03</span>
+      <h3>Portfolio analysis</h3>
+      <p>Mean-variance optimization, Markowitz portfolios and asset analysis.</p>
+    </article>
+  </div>
+
+  <section class="section-block">
+    <p class="eyebrow">Selected work</p>
+    <h2>Related research and coursework</h2>
+    <div class="actions">
+      <a class="button primary" href="/en/projects/rnn-vs-gam-finanzas/">RNN/LSTM vs GAM</a>
+      <a class="button" href="https://github.com/LeKilleRGallet/university/blob/master/econometrics/ECONOMETRIA2/Trabajo1/main.pdf" target="_blank" rel="noreferrer">ARIMA / oil exports</a>
+      <a class="button" href="https://github.com/LeKilleRGallet/university/blob/master/econometrics/ECONOMETRIA2/Trabajo2/main.pdf" target="_blank" rel="noreferrer">Cointegration / silver</a>
+    </div>
+  </section>
+
+  <TrackedLanding label="This page may register an anonymous visit when opened from a tracked application." />
+</BaseLayout>
