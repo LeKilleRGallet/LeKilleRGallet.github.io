@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
+import { publicProfile } from "../data/publicProfile";
 
 const proyectos = (
   await getCollection("proyectos", ({ data }) => data.public && data.featured)
@@ -10,16 +11,15 @@ const proyectos = (
 
 <BaseLayout
   title="Augusto Rico"
-  description="Economista y analista de datos en Bogotá. Python, SQL, PySpark, Databricks, Power BI e investigación en economía, comportamiento y métodos cuantitativos."
+  description="Augusto Rico: economista de la Universidad Nacional de Colombia, Analista I en la DIAN, data analyst e investigador en Bogotá. Python, SQL, PySpark, Databricks, Power BI, econometría y machine learning."
 >
   <section class="hero">
-    <p class="eyebrow">Economist · Data Analyst · Research</p>
+    <p class="eyebrow">{publicProfile.headline}</p>
     <h1>Economía, datos e investigación aplicada.</h1>
     <p class="hero-copy">
-      Soy economista de la Universidad Nacional de Colombia y trabajo como
-      Analista I en la DIAN. Desarrollo análisis cuantitativo, flujos
-      reproducibles y proyectos de investigación con Python, SQL, PySpark,
-      Databricks, Power BI y métodos estadísticos.
+      {publicProfile.description}
+      Desarrollo análisis cuantitativo, flujos reproducibles y proyectos de
+      investigación con {publicProfile.skills.slice(0, 6).join(", ")}.
     </p>
 
     <div class="actions">
@@ -29,9 +29,9 @@ const proyectos = (
     </div>
 
     <ul class="hero-facts" aria-label="Datos principales">
-      <li>Bogotá, Colombia</li>
-      <li>Español · English · Deutsch</li>
-      <li>Disponible para proyectos remotos y por entregables</li>
+      <li>{publicProfile.location.city}, {publicProfile.location.country}</li>
+      <li>{publicProfile.languages.map((x) => x.language).join(" · ")}</li>
+      <li>{publicProfile.availability.slice(0, 3).join(" · ")}</li>
     </ul>
   </section>
 
@@ -106,14 +106,35 @@ const proyectos = (
     </div>
   </section>
 
+  <section class="section-block">
+    <div class="two-column">
+      <div>
+        <p class="eyebrow">Public source of truth</p>
+        <h2>Perfil público legible por personas y máquinas.</h2>
+        <p>
+          El sitio mantiene un perfil canónico, investigación con estados explícitos,
+          PDFs, archivo académico y endpoints públicos para agentes y buscadores.
+        </p>
+      </div>
+      <div>
+        <p class="eyebrow">Machine-readable</p>
+        <ul>
+          <li><a href="/api/profile.json">Perfil JSON</a></li>
+          <li><a href="/api/research.json">Investigación JSON</a></li>
+          <li><a href="/llms.txt">llms.txt</a></li>
+          <li><a href="/feed.xml">Feed</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <section class="callout">
     <div>
       <p class="eyebrow">Colaboración</p>
       <h2>Data, research support y análisis económico.</h2>
       <p>
         Puedo apoyar proyectos por horas o por entregables en análisis de datos,
-        BI, investigación cuantitativa, revisión de evidencia y evaluación de
-        modelos.
+        BI, investigación cuantitativa, revisión de evidencia y evaluación de modelos.
       </p>
     </div>
     <a class="button primary" href="/colaborar/">Áreas de colaboración</a>
