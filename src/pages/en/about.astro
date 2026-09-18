@@ -1,0 +1,95 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { publicProfile } from "../../data/publicProfile";
+
+const personId = new URL("/#person", Astro.site).toString();
+const profileUrl = new URL("/en/about/", Astro.site).toString();
+
+const profileJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": `${profileUrl}#profile`,
+  url: profileUrl,
+  name: `${publicProfile.name} — public profile`,
+  inLanguage: "en",
+  dateModified: publicProfile.lastUpdated,
+  mainEntity: {
+    "@type": "Person",
+    "@id": personId,
+    name: publicProfile.name,
+    alternateName: "LeKilleRGallet",
+    description: publicProfile.descriptionEn,
+    url: publicProfile.links.website,
+    jobTitle: "Economist and Data Analyst",
+    sameAs: [publicProfile.links.linkedin, publicProfile.links.github],
+    knowsAbout: [...publicProfile.skills, ...publicProfile.researchAreas],
+  },
+};
+---
+
+<BaseLayout
+  title="About Augusto Rico"
+  description="Public profile of Augusto Rico, economist from Universidad Nacional de Colombia, data analyst and researcher based in Bogotá, Colombia."
+  lang="en"
+  alternateEs="/sobre-mi/"
+  alternateEn="/en/about/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(profileJsonLd)} />
+  </Fragment>
+
+  <article class="prose wide">
+    <header class="page-header">
+      <p class="eyebrow">Canonical public profile</p>
+      <h1>{publicProfile.name}</h1>
+      <p>{publicProfile.descriptionEn}</p>
+    </header>
+
+    <div class="two-column">
+      <section>
+        <h2>Experience</h2>
+        {publicProfile.experience.map((item) => (
+          <div class="cv-item">
+            <div>
+              <h3>{item.organization}</h3>
+              <p class="metadata">{item.roleEn} · {item.start}{item.current ? " — present" : item.end ? ` — ${item.end}` : ""}</p>
+            </div>
+            <p>{item.publicSummaryEn}</p>
+          </div>
+        ))}
+      </section>
+
+      <section>
+        <h2>Research</h2>
+        <p>Public research areas include {publicProfile.researchAreas.join(", ")}.</p>
+        <p>
+          I also participate as formal co-director, on behalf of DIAN, in a project
+          on multidimensional measurement of business tax informality. Project pages
+          distinguish authorship, direction and co-direction.
+        </p>
+      </section>
+    </div>
+
+    <h2>Methods and tools</h2>
+    <ul class="tags">
+      {[...publicProfile.skills, ...publicProfile.methods].map((item) => <li>{item}</li>)}
+    </ul>
+
+    <h2>Education</h2>
+    {publicProfile.education.map((education) => (
+      <p><strong>{education.degreeEn}</strong> · {education.institution} · {education.year}</p>
+    ))}
+
+    <h2>Languages</h2>
+    <p>{publicProfile.languages.map((item) => `${item.language}: ${item.level}`).join(" · ")}</p>
+
+    <h2>Availability</h2>
+    <p>{publicProfile.availability.join(" · ")}</p>
+
+    <div class="actions">
+      <a class="button primary" href="/pdf/cv.pdf">CV PDF</a>
+      <a class="button" href="/en/research/">Research</a>
+      <a class="button" href="/en/contact/">Contact</a>
+    </div>
+  </article>
+</BaseLayout>
